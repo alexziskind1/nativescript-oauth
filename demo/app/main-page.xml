@@ -1,0 +1,6 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
+  <StackLayout>
+    <Label text="Login" class="title"/>
+    <Button text="TAP" tap="{{ onTap }}" />
+  </StackLayout>
+</Page>

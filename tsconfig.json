@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "removeComments": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "noEmitHelpers": true,
+        "noEmitOnError": false
+    },
+    "files": [
+        "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
+        "demo/node_modules/tns-core-modules/es6-promise.d.ts",
+        "demo/typings/ios.d.ts",
+        "demo/typings/url.d.ts",
+        "demo/typings/querystring.d.ts",
+        "./tns-oauth-interfaces.d.ts"
+    ],
+    "compileOnSave": false,
+    "exclude": [
+        "node_modules",
+        "platforms"
+    ]
+}

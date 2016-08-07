@@ -1,0 +1,53 @@
+{
+  "name": "nativescript-oauth",
+  "version": "0.0.1",
+  "description": "OAuth 2 login for NativeScript.",
+  "main": "index.js",
+  "nativescript": {
+    "platforms": {
+      "ios": "2.0.0"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.ios": "npm run preparedemo && cd demo && tns emulate ios",
+    "demo.android": "npm run preparedemo && cd demo && tns run android",
+    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-oauth && tns plugin add .. && tns install",
+    "setup": "cd demo && npm install && cd .. && npm run build && cd demo && tns plugin add .. && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexziskind1/nativescript-oauth.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "TypeScript",
+    "Office365",
+    "Facebook",
+    "Azure AD",
+    "iOS"
+  ],
+  "author": {
+    "name": "Alexander Ziskind",
+    "email": "alex@nuvious.com"
+  },
+  "bugs": {
+    "url": "https://github.com/alexziskind1/nativescript-oauth/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/alexziskind1/nativescript-oauth/blob/master/LICENSE"
+  },
+  "homepage": "https://github.com/alexziskind1/nativescript-oauth",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "querystring": "^0.2.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "tns-core-modules": "2.1.0",
+    "nativescript-dev-typescript": "^0.3.0"
+  }
+}

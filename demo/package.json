@@ -1,0 +1,19 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.demo",
+    "tns-ios": {
+      "version": "2.1.1"
+    },
+    "tns-android": {
+      "version": "2.0.0"
+    }
+  },
+  "dependencies": {
+    "nativescript-oauth": "file:..",
+    "tns-core-modules": "^2.0.0"
+  },
+  "devDependencies": {
+    "nativescript-dev-typescript": "^0.3.2",
+    "typescript": "^1.8.10"
+  }
+}
