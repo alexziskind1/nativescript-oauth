@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
   <StackLayout>
-    <Label text="Login" class="title"/>
-    <Button text="TAP" tap="{{ onTap }}" />
+    <Label text="How do you want to log in?" class="login-title"/>
+    <Button class="btn-login-ms" text="Microsoft Account" tap="{{ onMicrosoftTap }}"/>
   </StackLayout>
 </Page>

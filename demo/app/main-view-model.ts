@@ -9,7 +9,7 @@ export class HelloWorldModel extends Observable {
     super();
   }
 
-  public onTap() {
+  public onMicrosoftTap() {
     tnsOAuthModule.login()
       .then(()=>{
         console.log('logged in');
