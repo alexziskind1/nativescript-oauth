@@ -74,6 +74,10 @@ export function getAuthUrl(credentials: TnsOAuth.ITnsOAuthCredentials) : string 
     '&state=abcd';
 }
 
+export function getTokenFromCache() {
+    return TnsOAuthTokenCache.getToken();
+}
+
 export function loginViaAuthorizationCodeFlow(credentials: TnsOAuth.ITnsOAuthCredentials, successPage?: string) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;

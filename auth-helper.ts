@@ -6,6 +6,10 @@ export class AuthHelper {
     public credentials: TnsOAuth.ITnsOAuthCredentials;
     public tokenResult: TnsOAuth.ITnsOAuthTokenResult;
 
+    constructor() {
+        this.tokenResult = tnsOauth.getTokenFromCache();
+    }
+
     public login(successPage?: string) : Promise<string> {
         return new Promise((resolve, reject)=>{
             tnsOauth.loginViaAuthorizationCodeFlow(this.credentials, successPage)
