@@ -10,11 +10,21 @@
     },
     "files": [
         "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
-        "demo/node_modules/tns-core-modules/es6-promise.d.ts",
         "demo/typings/ios.d.ts",
         "demo/typings/url.d.ts",
         "demo/typings/querystring.d.ts",
-        "./tns-oauth-interfaces.d.ts"
+        "tns-oauth-interfaces.d.ts",
+        "auth-helper.ts",
+        "auth-helper-facebook.ts",
+        "auth-helper-google.ts",
+        "auth-helper-office365.ts",
+        "index.ts",
+        "tns-oauth.ts",
+        "tns-oauth-page-provider.ts",
+        "tns-oauth-token-cache.ts",
+        "tns-oauth-utils.ts",
+        "tns-oauth-uuid.ts",
+        "tns-oauth-webview.ts"
     ],
     "compileOnSave": false,
     "exclude": [

@@ -1,7 +1,7 @@
 import * as tnsOauth from './tns-oauth';
 import { AuthHelper } from './auth-helper';
 
-export class AuthHelperFacebook extends AuthHelper implements TnsAuthHelper {
+export class AuthHelperFacebook extends AuthHelper implements TnsOAuth.ITnsAuthHelper {
 
   constructor(clientId: string, clientSecret: string, scope: Array<string>) {
     super();

@@ -6,6 +6,7 @@ export class TnsOAuthWebViewDelegateImpl extends NSObject implements UIWebViewDe
     private _owner: WeakRef<WebView>;
     private _origDelegate: any; //UIWebViewDelegateImpl
     private _checkCodeIntercept;
+    
 
     public static initWithOwner(owner: WeakRef<WebView>, checkCodeIntercept): TnsOAuthWebViewDelegateImpl {
         let delegate = new TnsOAuthWebViewDelegateImpl();

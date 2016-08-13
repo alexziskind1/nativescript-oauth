@@ -6,6 +6,7 @@ import * as frameModule from 'ui/frame';
 import * as uuid from './tns-oauth-uuid';
 import * as utils from './tns-oauth-utils';
 import { TnsOAuthPageProvider } from './tns-oauth-page-provider';
+import { TnsOAuthTokenCache } from './tns-oauth-token-cache';
 
 export var ACCESS_TOKEN_CACHE_KEY = 'ACCESS_TOKEN_CACHE_KEY';
 export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
@@ -13,7 +14,7 @@ export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
 /**
  * Gets a token for a given resource.
  */
-function getTokenFromCode(credentials: TnsOAuthCredentials, code: string) : Promise<TnsOAuthTokenResult> {
+function getTokenFromCode(credentials: TnsOAuth.ITnsOAuthCredentials, code: string) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
   let oauth2 = new TnsOAuth(
     credentials.clientId,
     credentials.clientSecret,
@@ -37,7 +38,7 @@ function getTokenFromCode(credentials: TnsOAuthCredentials, code: string) : Prom
 /**
  * Gets a new access token via a previously issued refresh token.
  */
-export function getTokenFromRefreshToken(credentials: TnsOAuthCredentials, refreshToken: string) : Promise<TnsOAuthTokenResult> {
+export function getTokenFromRefreshToken(credentials: TnsOAuth.ITnsOAuthCredentials, refreshToken: string) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
   var oauth2 = new TnsOAuth(
     credentials.clientId,
     credentials.clientSecret,
@@ -62,7 +63,7 @@ export function getTokenFromRefreshToken(credentials: TnsOAuthCredentials, refre
  * Generate a fully formed uri to use for authentication based on the supplied resource argument
  * @return {string} a fully formed uri with which authentication can be completed
  */
-export function getAuthUrl(credentials: TnsOAuthCredentials) : string {
+export function getAuthUrl(credentials: TnsOAuth.ITnsOAuthCredentials) : string {
   return credentials.authority + credentials.authorizeEndpoint +
     '?client_id=' + credentials.clientId +
     '&response_type=code' +
@@ -73,7 +74,7 @@ export function getAuthUrl(credentials: TnsOAuthCredentials) : string {
     '&state=abcd';
 }
 
-export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthCredentials, successPage?: string) : Promise<TnsOAuthTokenResult> {
+export function loginViaAuthorizationCodeFlow(credentials: TnsOAuth.ITnsOAuthCredentials, successPage?: string) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;
       
@@ -99,7 +100,8 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthCredentials, 
                     if (codeStr) {
                         try {
                             getTokenFromCode(credentials, codeStr)
-                            .then((response: TnsOAuthTokenResult)=>{
+                            .then((response: TnsOAuth.ITnsOAuthTokenResult)=>{
+                                TnsOAuthTokenCache.setToken(response);
                                 if (successPage && navCount === 0) {
                                     let navEntry: frameModule.NavigationEntry = {
                                         moduleName: successPage,
@@ -128,6 +130,27 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthCredentials, 
 
         let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials));
         frameModule.topmost().navigate(()=>{return authPage.loginPageFunc()});
+    });
+}
+
+export function refreshToken(credentials: TnsOAuth.ITnsOAuthCredentials) : Promise<TnsOAuth.ITnsOAuthTokenResult>  {
+    return new Promise((resolve, reject) => {
+        try {
+            let oldTokenResult = TnsOAuthTokenCache.getToken();
+                
+            getTokenFromRefreshToken(credentials, oldTokenResult.refreshToken)
+                .then((response: TnsOAuth.ITnsOAuthTokenResult)=>{
+                    TnsOAuthTokenCache.setToken(response);
+                    resolve(response);
+                })
+                .catch((er)=>{
+                    reject(er);
+                });
+        } catch(er) {
+            console.error('refreshToken error occurred...');
+            console.dir(er);
+            reject(er);
+        }
     });
 }
 
@@ -220,8 +243,8 @@ class TnsOAuth {
         return this._baseSite + this._authorizeUrl + "?" + querystring.stringify(params);
     }
 
-    public getOAuthAccessToken(code, params) : Promise<TnsOAuthTokenResult> {
-        console.log('called TnsOAuth.getOAuthAccessToken');
+    public getOAuthAccessToken(code, params) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
+        //console.log('called TnsOAuth.getOAuthAccessToken');
         var params= params || {};
         params['client_id'] = this._clientId;
         if (this._clientSecret && this._clientSecret != '') {
@@ -236,7 +259,7 @@ class TnsOAuth {
             'Content-Type': 'application/x-www-form-urlencoded'
         };
 
-        return new Promise<TnsOAuthTokenResult>((resolve, reject)=>{
+        return new Promise<TnsOAuth.ITnsOAuthTokenResult>((resolve, reject)=>{
             this._request("POST", this.accessTokenUrl, post_headers, post_data, null)
             .then((response:http.HttpResponse)=>{
                 var results;
@@ -252,10 +275,23 @@ class TnsOAuth {
                     // being thrown
                     results = querystring.parse(response.content.toString());
                 }
-                var access_token = results["access_token"];
-                var refresh_token = results["refresh_token"];
+                let access_token = results["access_token"];
+                let refresh_token = results["refresh_token"];
+                let expires_in = results["expires_in"];
                 delete results["refresh_token"];
-                resolve({accessToken: access_token, refreshToken: refresh_token});
+
+                let expSecs = Math.floor(parseFloat(expires_in));
+                let expDate = new Date();
+                expDate.setSeconds(expDate.getSeconds() + expSecs);
+
+                let tokenResult: TnsOAuth.ITnsOAuthTokenResult = {
+                    accessToken: access_token, 
+                    refreshToken: refresh_token,
+                    accessTokenExpiration: expDate,
+                    refreshTokenExpiration: expDate
+                };
+
+                resolve(tokenResult);
             })
             .catch((er)=>{
                 reject(er);

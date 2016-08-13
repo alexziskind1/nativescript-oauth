@@ -1,7 +1,7 @@
 import * as tnsOauth from './tns-oauth';
 import { AuthHelper } from './auth-helper';
 
-export class AuthHelperGoogle extends AuthHelper implements TnsAuthHelper {
+export class AuthHelperGoogle extends AuthHelper implements TnsOAuth.ITnsAuthHelper {
   
   constructor(clientId: string, scope: Array<string>) {
     super();

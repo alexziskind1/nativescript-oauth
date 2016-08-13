@@ -1,39 +1,45 @@
 
-interface TnsAuthHelper {
-    credentials: TnsOAuthCredentials;
-    tokenResult: TnsOAuthTokenResult;
-    login: (successPage?: string) => Promise<{}>;
-    logout: (successPage: string) => Promise<{}>;
-    accessTokenExpired: () => boolean;
-}
+declare module TnsOAuth {
+    interface ITnsAuthHelper {
+        credentials: ITnsOAuthCredentials;
+        tokenResult: ITnsOAuthTokenResult;
+        login: (successPage?: string) => Promise<string>;
+        logout: (successPage: string) => Promise<{}>;
+        refreshToken: () => Promise<string>;
+        accessTokenExpired: () => boolean;
+        refreshTokenExpired: () => boolean;
+    }
 
-interface TnsOAuthCredentials {
-    authority: string;
-    tokenEndpointBase?: string;
-    authorizeEndpoint: string;
-    tokenEndpoint: string;
-    clientId: string;
-    clientSecret?: string;
-    redirectUri: string;
-    scope: string;
-}
+    interface ITnsOAuthCredentials {
+        authority: string;
+        tokenEndpointBase?: string;
+        authorizeEndpoint: string;
+        tokenEndpoint: string;
+        clientId: string;
+        clientSecret?: string;
+        redirectUri: string;
+        scope: string;
+    }
 
-interface TnsOAuthTokenResult {
-     accessToken: string;
-     refreshToken: string;
-}
+    interface ITnsOAuthTokenResult {
+        accessToken: string;
+        refreshToken: string;
+        accessTokenExpiration: Date;
+        refreshTokenExpiration: Date;
+    }
 
-interface TnsOAuthOptions {
-    clientId: string;
-    scope: string[];
-}
+    interface ITnsOAuthOptions {
+        clientId: string;
+        scope: string[];
+    }
 
-interface TnsOAuthOptionsOffice365 extends TnsOAuthOptions {
-}
+    interface ITnsOAuthOptionsOffice365 extends ITnsOAuthOptions {
+    }
 
-interface TnsOAuthOptionsFacebook extends TnsOAuthOptions {
-    clientSecret: string;
-}
+    interface ITnsOAuthOptionsFacebook extends ITnsOAuthOptions {
+        clientSecret: string;
+    }
 
-interface TnsOAuthOptionsGoogle extends TnsOAuthOptions {
+    interface ITnsOAuthOptionsGoogle extends ITnsOAuthOptions {
+    }
 }
