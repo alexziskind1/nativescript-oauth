@@ -17,7 +17,19 @@ export class HelloWorldModel extends Observable {
         //frameModule.topmost().navigate('explorer');
       })
       .catch((er)=>{
-        console.log(er);
+          console.error('error');
+          console.dir(er);
+      });
+  }
+
+  public onTapGetData() {
+    tnsOAuthModule.ensureValidToken()
+      .then((token: string)=>{
+          console.log('token: ' + token);
+      })
+      .catch((er)=>{
+        console.error('error');
+        console.dir(er);
       });
   }
 }

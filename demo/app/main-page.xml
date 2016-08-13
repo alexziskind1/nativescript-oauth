@@ -2,5 +2,7 @@
   <StackLayout>
     <Label text="How do you want to log in?" class="login-title"/>
     <Button class="btn-login-ms" text="Microsoft Account" tap="{{ onMicrosoftTap }}"/>
+
+    <Button text="Get data" tap="{{ onTapGetData }}" />
   </StackLayout>
 </Page>
