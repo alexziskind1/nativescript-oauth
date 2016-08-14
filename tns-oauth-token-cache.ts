@@ -10,8 +10,12 @@ export class TnsOAuthTokenCache {
 
     public static getToken() : TnsOAuth.ITnsOAuthTokenResult {
         if (applicationSettingsModule.hasKey(TNS_OAUTH_KEY)) {
-            let t = applicationSettingsModule.getString(TNS_OAUTH_KEY);
-            return <TnsOAuth.ITnsOAuthTokenResult>JSON.parse(t);
+            let trStr = applicationSettingsModule.getString(TNS_OAUTH_KEY);
+            let tr = <TnsOAuth.ITnsOAuthTokenResult>JSON.parse(trStr);
+
+            tr.accessTokenExpiration = new Date(tr.accessTokenExpiration.toString());
+            tr.refreshTokenExpiration = new Date(tr.refreshTokenExpiration.toString());
+            return tr;
         }
         else return null;
     }
