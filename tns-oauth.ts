@@ -168,6 +168,8 @@ export function logout(cookieDomains: string[], successPage: string) {
             }
         }
     }
+    TnsOAuthTokenCache.removeToken();
+
     let navEntry: frameModule.NavigationEntry = {
                     moduleName: successPage,
                     clearHistory: true
