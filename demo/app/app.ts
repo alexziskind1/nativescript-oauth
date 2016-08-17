@@ -2,7 +2,7 @@
 import * as tnsOAuthModule from 'nativescript-oauth';
 
 var o365InitOptions : TnsOAuth.ITnsOAuthOptionsOffice365 = {
-    clientId: 'efe9a9ce-2dce-4b25-b122-bfef6aa4a9ff', //client id for application (GUID)
+    clientId: 'd07edd43-95dd-4cd3-bcab-75cbbc1c7431', //client id for application (GUID)
     scope: ['Files.ReadWrite', 'User.ReadWrite', 'offline_access']
 };
 
