@@ -1,8 +1,8 @@
 # OAuth 2 login plugin for NativeScript
 
-Library for interacting with OAuth 2.0 in NativeScript applications that provides simplified client access with a OAuth providers that support the OAuth 2.0 protocol such as Microsoft Live accounts, Microsoft Graph, Office 365, Facebook, and Google (google is a work in progress due to some of their restrictions).
+Library for interacting with OAuth 2.0 in NativeScript applications that provides simplified client access with a OAuth providers that support the OAuth 2.0 protocol such as Microsoft Live accounts, Microsoft Graph, Office 365, Facebook, and Google (Google is a work in progress due to some of their restrictions).
 
-***NOTE:*** **This library is a work in progress. It currently supports only iOS and is not production ready.**
+***NEW:*** **Now with Android Support!**
 
 <img src="docs/images/nativescript-oauth-logo.png" alt="NativeScript OAuth 2"/><br/>
 

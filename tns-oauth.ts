@@ -82,7 +82,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuth.ITnsOAuthCre
     return new Promise((resolve, reject) => {
         var navCount = 0;
       
-        let checkCodeIntercept = (webView, error) => {
+        let checkCodeIntercept = (webView, error, url) => {
             var retStr = '';
 
             if (error && error.userInfo && error.userInfo.allValues && error.userInfo.allValues.count > 0) {
@@ -94,6 +94,8 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuth.ITnsOAuthCre
                 } 
             } else if (webView.request && webView.request.URL && webView.request.URL.absoluteString) {
                 retStr = webView.request.URL.absoluteString;
+            } else if (url) {
+                retStr = url;
             }
 
             if (retStr != '') {

@@ -1,11 +1,12 @@
 {
   "name": "nativescript-oauth",
-  "version": "0.5.0",
+  "version": "0.9.0",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
   "nativescript": {
     "platforms": {
-      "ios": "2.0.0"
+      "ios": "2.2.0",
+      "android": "2.2.0"
     }
   },
   "scripts": {
@@ -26,7 +27,8 @@
     "Office365",
     "Facebook",
     "Azure AD",
-    "iOS"
+    "iOS",
+    "Android"
   ],
   "author": {
     "name": "Alexander Ziskind",

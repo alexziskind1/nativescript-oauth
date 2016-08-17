@@ -3,6 +3,7 @@ import { GridLayout } from 'ui/layouts/grid-layout';
 import { StackLayout } from 'ui/layouts/stack-layout';
 import { WebView } from 'ui/web-view';
 import { TnsOAuthWebViewDelegateImpl } from './tns-oauth-webview';
+import { TnsOAuthWebViewHelper } from './tns-oauth-webview-helper';
 
 
 export class TnsOAuthPageProvider {
@@ -16,7 +17,8 @@ export class TnsOAuthPageProvider {
 
     public loginPageFunc() {
         let wv = new WebView();
-        (<any>wv)._delegate = TnsOAuthWebViewDelegateImpl.initWithOwner(new WeakRef(wv), this._checkCodeIntercept);
+
+        TnsOAuthWebViewHelper.initWithWebViewAndIntercept(wv, this._checkCodeIntercept);
 
         let grid = new GridLayout();
         grid.addChild(wv);

@@ -24,7 +24,9 @@
         "tns-oauth-token-cache.ts",
         "tns-oauth-utils.ts",
         "tns-oauth-uuid.ts",
-        "tns-oauth-webview.ts"
+        "tns-oauth-webview.ts",
+        "tns-oauth-webview-helper.ios.ts",
+        "tns-oauth-webview-helper.android.ts"
     ],
     "compileOnSave": false,
     "exclude": [
