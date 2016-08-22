@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "nativescript-oauth": "file:..",
-    "tns-core-modules": "^2.0.0"
+    "tns-core-modules": "^2.0.0",
+    "tns-platform-declarations": "^2.2.0"
   },
   "devDependencies": {
     "babel-traverse": "6.13.0",

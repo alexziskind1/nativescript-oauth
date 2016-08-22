@@ -10,6 +10,7 @@
     },
     "files": [
         "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
+        "demo/node_modules/tns-platform-declarations/tns-core-modules/android17.d.ts",
         "demo/typings/ios.d.ts",
         "demo/typings/url.d.ts",
         "demo/typings/querystring.d.ts",
