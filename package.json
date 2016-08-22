@@ -1,6 +1,6 @@
 {
   "name": "nativescript-oauth",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
   "nativescript": {
@@ -32,8 +32,16 @@
   ],
   "author": {
     "name": "Alexander Ziskind",
-    "email": "alex@nuvious.com"
+    "email": "alex@nuvious.com",
+    "url" : "http://www.nuvious.com/blog"
   },
+  "contributors": [
+    {
+      "name": "Kevin Primm",
+      "email": "kfprimm@gmail.com",
+      "url" : "http://primm.me/"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/alexziskind1/nativescript-oauth/issues"
   },

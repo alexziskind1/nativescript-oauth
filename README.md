@@ -81,3 +81,14 @@ tnsOAuthModule.initFacebook(facebookInitOptions);
 ```
 
 to be continued...
+
+## Contributing
+
+1. Fork the nativescript-oauth repository on GitHub
+2. Clone your fork
+3. Change directory to ```nativescript-oauth```
+4. Run ```npm install``` to install all npm packages for the plugin
+5. Change directory to ```demo```
+6. Run ```npm install``` to install all npm packages for the demo project
+7. Replace the ClientId in the app.ts file of the demo with your own ClientId
+8. Run the demo project
