@@ -10,10 +10,6 @@
         "declaration": false,
         "suppressImplicitAnyIndexErrors": true
     },
-    "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts"
-    ],
     "files": [
         "auth-helper.ts",
         "auth-helper-facebook.ts",
@@ -24,8 +20,6 @@
         "tns-oauth-page-provider.ts",
         "tns-oauth-token-cache.ts",
         "tns-oauth-utils.ts",
-        "tns-oauth-uuid.ts",
-        "tns-oauth-webview.ts",
         "tns-oauth-webview-helper.ios.ts",
         "tns-oauth-webview-helper.android.ts",
         "./typings/querystring.d.ts",
