@@ -6,7 +6,6 @@ import * as URL from 'url';
 import * as http from 'http';
 import * as trace from "trace";
 import * as frameModule from 'ui/frame';
-import * as uuid from './tns-oauth-uuid';
 import * as utils from './tns-oauth-utils';
 import { TnsOAuthPageProvider } from './tns-oauth-page-provider';
 import { TnsOAuthTokenCache } from './tns-oauth-token-cache';
@@ -32,7 +31,7 @@ function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code
       grant_type: 'authorization_code',
       redirect_uri: credentials.redirectUri,
       response_mode: 'form_post',
-      nonce: uuid.doit(),
+      nonce: utils.newUUID(),
       state: 'abcd'
   };
 
@@ -56,7 +55,7 @@ export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCr
       grant_type: 'refresh_token',
       redirect_uri: credentials.redirectUri,
       response_mode: 'form_post',
-      nonce: uuid.doit(),
+      nonce: utils.newUUID(),
       state: 'abcd'
   };
 
@@ -74,7 +73,7 @@ export function getAuthUrl(credentials: TnsOAuthModule.ITnsOAuthCredentials) : s
     '&redirect_uri=' + credentials.redirectUri +
     '&scope=' + credentials.scope +
     '&response_mode=query' +
-    '&nonce=' + uuid.doit() +
+    '&nonce=' + utils.newUUID() +
     '&state=abcd';
 }
 
