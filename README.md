@@ -24,8 +24,11 @@ For logging in with your Facebook account, you should have a Facebook developer 
 
 Register your mobile app by following the wizard under "My Apps" -> "Add a new app".
 
-1. Copy the "App ID" from the Dashboard section.
-2. Click to display the "App Secret" and copy that also.
+1. Go to https://developers.facebook.com/apps and create a new app
+2. If you see the Product Setup page, select Facebook login
+3. Under the Client OAuth section, enter ```https://www.facebook.com/connect/login_success.html``` as your Valid OAuth redirect URIs
+4. Click Save
+5. Copy the App ID and the App Secret from the Dashboard page to bootstrap your app. These will be the ClientID and CLientSecret respectively.
 
 
 ## Setup
@@ -48,7 +51,7 @@ Then open `references.d.ts` in the root of your project and add this line to get
 
 If you want a quickstart, [get the demo app here](https://github.com/alexziskind1/nativescript-oauth/tree/master/demo).
 
-### Start-up wiring
+### Bootstrapping
 We need to do some wiring when your app starts, so open `app.ts` and add this before `application.start();`:
 
 ##### TypeScript
@@ -59,7 +62,7 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 ###### For Office365 login, include the following lines
 
 ```js
-var o365InitOptions : TnsOAuthOptionsOffice365 = {
+var o365InitOptions : tnsOAuthModule.TnsOAuthOptionsOffice365 = {
     clientId: 'e392f6aa-da5c-434d-a42d-a0e0a27d3955', //client id for application (GUID)
     scope: ['Files.ReadWrite', 'offline_access'] //whatever other scopes you need
 };
@@ -71,7 +74,7 @@ tnsOAuthModule.initOffice365(o365InitOptions);
 ###### For Facebook login, include the following lines
 
 ```js
-var facebookInitOptions : TnsOAuthOptionsFacebook = {
+var facebookInitOptions : tnsOAuthModule.TnsOAuthOptionsFacebook = {
     clientId: '1119818654921555',
     clientSecret: 'bbb58f212b51e4d555bed857171c9aaa',
     scope: ['email'] //whatever other scopes you need
@@ -80,7 +83,35 @@ var facebookInitOptions : TnsOAuthOptionsFacebook = {
 tnsOAuthModule.initFacebook(facebookInitOptions);
 ```
 
-to be continued...
+### Logging in
+
+In your view controller (or wherever you will have a handler to respond to the login user action) you will reference the ```nativescript-oauth``` module again and call the ```login``` function.
+
+```js
+import * as tnsOAuthModule from 'nativescript-oauth';
+...
+tnsOAuthModule.login()
+    .then(()=>{
+        console.log('logged in');
+        console.dir("accessToken " + tnsOAuthModule.accessToken());
+    })
+    .catch((er)=>{
+        //do something with the error
+    });
+```
+
+When you make API calls you can use the ```ensureValidToken``` function, which will also ask you to authenticate, if the token is expired. 
+
+```js
+tnsOAuthModule.ensureValidToken()
+    .then((token: string)=>{
+        console.log('token: ' + token);
+    })
+    .catch((er)=>{
+        //do something with the error
+    });
+```
+
 
 ## Contributing
 
