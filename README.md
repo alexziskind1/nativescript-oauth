@@ -44,11 +44,6 @@ From the command prompt go to your app's root folder and execute:
 tns plugin add nativescript-oauth
 ```
 
-Then open `references.d.ts` in the root of your project and add this line to get autocompletion and type-checking for this plugin:
-
-```
-/// <reference path="./node_modules/nativescript-oauth/tns-oauth-interfaces.d.ts" />
-```
 
 ## Usage
 
