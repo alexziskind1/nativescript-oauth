@@ -13,6 +13,9 @@ Tested against Microsoft Live, Office 365, Microsoft Graph API, and Facebook.
 ### Office 365 / Microsoft Graph API
 For logging in with your Office 365 account, you should have an Office 365 Account admin account. If you don't have one yet, you can get a [free trial here](https://products.office.com/en-us/try).
 
+Watch a [video tutorial](https://youtu.be/nwf928oFGCM) for setting up the NativeScript OAuth plugin and registering you app with Microsoft.
+
+
 Register your mobile app [here](https://apps.dev.microsoft.com). This will require you to login with your Office 365 account. You can then click the big "Add an app" button and go through the steps listed there, starting with giving you app a name. On the app creation screen, you need to do 3 things:
 
 1. Click the "Add Platform" button and select "Mobile application"
