@@ -1,3 +1,5 @@
+/// <reference path="references.d.ts" />
+
 import { WebView  } from 'ui/web-view';
 import trace = require("trace");
 

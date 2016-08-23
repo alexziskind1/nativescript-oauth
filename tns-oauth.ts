@@ -1,3 +1,6 @@
+/// <reference path="references.d.ts" />
+
+
 import * as querystring from 'querystring';
 import * as URL from 'url';
 import * as http from 'http';
@@ -7,6 +10,7 @@ import * as uuid from './tns-oauth-uuid';
 import * as utils from './tns-oauth-utils';
 import { TnsOAuthPageProvider } from './tns-oauth-page-provider';
 import { TnsOAuthTokenCache } from './tns-oauth-token-cache';
+import * as TnsOAuthModule from './tns-oauth-interfaces';
 
 export var ACCESS_TOKEN_CACHE_KEY = 'ACCESS_TOKEN_CACHE_KEY';
 export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
@@ -14,7 +18,7 @@ export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
 /**
  * Gets a token for a given resource.
  */
-function getTokenFromCode(credentials: TnsOAuth.ITnsOAuthCredentials, code: string) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
+function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code: string) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
   let oauth2 = new TnsOAuth(
     credentials.clientId,
     credentials.clientSecret,
@@ -38,7 +42,7 @@ function getTokenFromCode(credentials: TnsOAuth.ITnsOAuthCredentials, code: stri
 /**
  * Gets a new access token via a previously issued refresh token.
  */
-export function getTokenFromRefreshToken(credentials: TnsOAuth.ITnsOAuthCredentials, refreshToken: string) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
+export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials, refreshToken: string) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
   var oauth2 = new TnsOAuth(
     credentials.clientId,
     credentials.clientSecret,
@@ -63,7 +67,7 @@ export function getTokenFromRefreshToken(credentials: TnsOAuth.ITnsOAuthCredenti
  * Generate a fully formed uri to use for authentication based on the supplied resource argument
  * @return {string} a fully formed uri with which authentication can be completed
  */
-export function getAuthUrl(credentials: TnsOAuth.ITnsOAuthCredentials) : string {
+export function getAuthUrl(credentials: TnsOAuthModule.ITnsOAuthCredentials) : string {
   return credentials.authority + credentials.authorizeEndpoint +
     '?client_id=' + credentials.clientId +
     '&response_type=code' +
@@ -78,7 +82,7 @@ export function getTokenFromCache() {
     return TnsOAuthTokenCache.getToken();
 }
 
-export function loginViaAuthorizationCodeFlow(credentials: TnsOAuth.ITnsOAuthCredentials, successPage?: string) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
+export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, successPage?: string) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;
       
@@ -106,7 +110,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuth.ITnsOAuthCre
                     if (codeStr) {
                         try {
                             getTokenFromCode(credentials, codeStr)
-                            .then((response: TnsOAuth.ITnsOAuthTokenResult)=>{
+                            .then((response: TnsOAuthModule.ITnsOAuthTokenResult)=>{
                                 TnsOAuthTokenCache.setToken(response);
                                 if (successPage && navCount === 0) {
                                     let navEntry: frameModule.NavigationEntry = {
@@ -139,13 +143,13 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuth.ITnsOAuthCre
     });
 }
 
-export function refreshToken(credentials: TnsOAuth.ITnsOAuthCredentials) : Promise<TnsOAuth.ITnsOAuthTokenResult>  {
+export function refreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials) : Promise<TnsOAuthModule.ITnsOAuthTokenResult>  {
     return new Promise((resolve, reject) => {
         try {
             let oldTokenResult = TnsOAuthTokenCache.getToken();
                 
             getTokenFromRefreshToken(credentials, oldTokenResult.refreshToken)
-                .then((response: TnsOAuth.ITnsOAuthTokenResult)=>{
+                .then((response: TnsOAuthModule.ITnsOAuthTokenResult)=>{
                     TnsOAuthTokenCache.setToken(response);
                     resolve(response);
                 })
@@ -251,7 +255,7 @@ class TnsOAuth {
         return this._baseSite + this._authorizeUrl + "?" + querystring.stringify(params);
     }
 
-    public getOAuthAccessToken(code, params) : Promise<TnsOAuth.ITnsOAuthTokenResult> {
+    public getOAuthAccessToken(code, params) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
         //console.log('called TnsOAuth.getOAuthAccessToken');
         var params= params || {};
         params['client_id'] = this._clientId;
@@ -267,7 +271,7 @@ class TnsOAuth {
             'Content-Type': 'application/x-www-form-urlencoded'
         };
 
-        return new Promise<TnsOAuth.ITnsOAuthTokenResult>((resolve, reject)=>{
+        return new Promise<TnsOAuthModule.ITnsOAuthTokenResult>((resolve, reject)=>{
             this._request("POST", this.accessTokenUrl, post_headers, post_data, null)
             .then((response:http.HttpResponse)=>{
                 var results;
@@ -292,7 +296,7 @@ class TnsOAuth {
                 let expDate = new Date();
                 expDate.setSeconds(expDate.getSeconds() + expSecs);
 
-                let tokenResult: TnsOAuth.ITnsOAuthTokenResult = {
+                let tokenResult: TnsOAuthModule.ITnsOAuthTokenResult = {
                     accessToken: access_token, 
                     refreshToken: refresh_token,
                     accessTokenExpiration: expDate,

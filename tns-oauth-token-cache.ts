@@ -1,3 +1,7 @@
+/// <reference path="references.d.ts" />
+
+import * as TnsOAuth from './tns-oauth-interfaces';
+
 import * as applicationSettingsModule from "application-settings";
 
 const TNS_OAUTH_KEY = "TNS_OAUTH_KEY";

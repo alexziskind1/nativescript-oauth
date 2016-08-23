@@ -1,3 +1,5 @@
+/// <reference path="references.d.ts" />
+
 import { WebView  } from 'ui/web-view';
 
 export class TnsOAuthWebViewDelegateImpl extends NSObject implements UIWebViewDelegate {

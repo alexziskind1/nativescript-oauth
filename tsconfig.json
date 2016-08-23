@@ -2,19 +2,19 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
+        "noImplicitAny": false,
         "removeComments": true,
         "experimentalDecorators": true,
-        "sourceMap": true,
-        "noEmitHelpers": true,
-        "noEmitOnError": false
+        "noLib": false,
+        "preserveConstEnums": true,
+        "declaration": false,
+        "suppressImplicitAnyIndexErrors": true
     },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
     "files": [
-        "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
-        "demo/node_modules/tns-platform-declarations/tns-core-modules/android17.d.ts",
-        "demo/typings/ios.d.ts",
-        "demo/typings/url.d.ts",
-        "demo/typings/querystring.d.ts",
-        "tns-oauth-interfaces.d.ts",
         "auth-helper.ts",
         "auth-helper-facebook.ts",
         "auth-helper-google.ts",
@@ -27,7 +27,9 @@
         "tns-oauth-uuid.ts",
         "tns-oauth-webview.ts",
         "tns-oauth-webview-helper.ios.ts",
-        "tns-oauth-webview-helper.android.ts"
+        "tns-oauth-webview-helper.android.ts",
+        "./typings/querystring.d.ts",
+        "./typings/url.d.ts"
     ],
     "compileOnSave": false,
     "exclude": [

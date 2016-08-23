@@ -1,8 +1,10 @@
+/// <reference path="references.d.ts" />
+
 import { Page } from 'ui/page';
 import { GridLayout } from 'ui/layouts/grid-layout';
 import { StackLayout } from 'ui/layouts/stack-layout';
 import { WebView } from 'ui/web-view';
-import { TnsOAuthWebViewDelegateImpl } from './tns-oauth-webview';
+//import { TnsOAuthWebViewDelegateImpl } from './tns-oauth-webview';
 import { TnsOAuthWebViewHelper } from './tns-oauth-webview-helper';
 
 

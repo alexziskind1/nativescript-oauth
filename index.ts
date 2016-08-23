@@ -1,8 +1,13 @@
+/// <reference path="references.d.ts" />
+
+
+
 import * as applicationModule from 'application';
 import * as utils from 'utils/utils';
 import { AuthHelperOffice365 } from './auth-helper-office365';
 import { AuthHelperFacebook } from './auth-helper-facebook';
 import { AuthHelperGoogle } from './auth-helper-google';
+import * as TnsOAuth from './tns-oauth-interfaces';
 
 export var instance : TnsOAuth.ITnsAuthHelper = null;
 

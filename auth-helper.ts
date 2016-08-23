@@ -1,6 +1,7 @@
-/// <reference path="./tns-oauth-interfaces.d.ts" />
+/// <reference path="references.d.ts" />
 
 import * as tnsOauth from './tns-oauth';
+import * as TnsOAuth from './tns-oauth-interfaces';
 
 export class AuthHelper {
     public credentials: TnsOAuth.ITnsOAuthCredentials;

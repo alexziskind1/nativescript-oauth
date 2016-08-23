@@ -1,6 +1,6 @@
 {
   "name": "nativescript-oauth",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
   "nativescript": {
@@ -20,6 +20,10 @@
     "type": "git",
     "url": "https://github.com/alexziskind1/nativescript-oauth.git"
   },
+  "typescript": {
+    "definition": "index.d.ts"
+  },
+  "typings": "index",
   "keywords": [
     "NativeScript",
     "JavaScript",
@@ -33,13 +37,13 @@
   "author": {
     "name": "Alexander Ziskind",
     "email": "alex@nuvious.com",
-    "url" : "http://www.nuvious.com/blog"
+    "url": "http://www.nuvious.com/blog"
   },
   "contributors": [
     {
       "name": "Kevin Primm",
       "email": "kfprimm@gmail.com",
-      "url" : "http://primm.me/"
+      "url": "https://github.com/kfprimm"
     }
   ],
   "bugs": {
@@ -52,12 +56,12 @@
   "homepage": "https://github.com/alexziskind1/nativescript-oauth",
   "readmeFilename": "README.md",
   "dependencies": {
-    "querystring": "^0.2.0",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "querystring": "^0.2.0"
   },
   "devDependencies": {
-    "typescript": "^1.8.10",
+    "nativescript-dev-typescript": "^0.3.0",
     "tns-core-modules": "^2.1.0",
-    "nativescript-dev-typescript": "^0.3.0"
+    "typescript": "^1.8.10"
   }
 }
