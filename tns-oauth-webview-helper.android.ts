@@ -57,6 +57,7 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
                 trace.write("WebViewClientClass.onPageFinished(" + url + ")", trace.categories.Debug);
             }
             this._view._onLoadFinished(url, undefined);
+            this._checkCodeIntercept(this._view, null, url);
         }
     }
 
