@@ -8,7 +8,10 @@
         "noLib": false,
         "preserveConstEnums": true,
         "declaration": false,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "lib": [
+            "es2016"
+        ]
     },
     "files": [
         "auth-helper.ts",

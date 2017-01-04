@@ -17,74 +17,74 @@ export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
 /**
  * Gets a token for a given resource.
  */
-function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code: string) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
-  let oauth2 = new TnsOAuth(
-    credentials.clientId,
-    credentials.clientSecret,
-    credentials.authority,
-    credentials.tokenEndpointBase,
-    credentials.authorizeEndpoint,
-    credentials.tokenEndpoint
-  );
+function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+    let oauth2 = new TnsOAuth(
+        credentials.clientId,
+        credentials.clientSecret,
+        credentials.authority,
+        credentials.tokenEndpointBase,
+        credentials.authorizeEndpoint,
+        credentials.tokenEndpoint
+    );
 
-  let oauthParams = {
-      grant_type: 'authorization_code',
-      redirect_uri: credentials.redirectUri,
-      response_mode: 'form_post',
-      nonce: utils.newUUID(),
-      state: 'abcd'
-  };
+    let oauthParams = {
+        grant_type: 'authorization_code',
+        redirect_uri: credentials.redirectUri,
+        response_mode: 'form_post',
+        nonce: utils.newUUID(),
+        state: 'abcd'
+    };
 
-  return oauth2.getOAuthAccessToken(code, oauthParams);
+    return oauth2.getOAuthAccessToken(code, oauthParams);
 }
 
 /**
  * Gets a new access token via a previously issued refresh token.
  */
-export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials, refreshToken: string) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
-  var oauth2 = new TnsOAuth(
-    credentials.clientId,
-    credentials.clientSecret,
-    credentials.authority,
-    credentials.tokenEndpointBase,
-    credentials.authorizeEndpoint,
-    credentials.tokenEndpoint
-  );
+export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials, refreshToken: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+    var oauth2 = new TnsOAuth(
+        credentials.clientId,
+        credentials.clientSecret,
+        credentials.authority,
+        credentials.tokenEndpointBase,
+        credentials.authorizeEndpoint,
+        credentials.tokenEndpoint
+    );
 
-  let oauthParams = {
-      grant_type: 'refresh_token',
-      redirect_uri: credentials.redirectUri,
-      response_mode: 'form_post',
-      nonce: utils.newUUID(),
-      state: 'abcd'
-  };
+    let oauthParams = {
+        grant_type: 'refresh_token',
+        redirect_uri: credentials.redirectUri,
+        response_mode: 'form_post',
+        nonce: utils.newUUID(),
+        state: 'abcd'
+    };
 
-  return oauth2.getOAuthAccessToken(refreshToken, oauthParams);
+    return oauth2.getOAuthAccessToken(refreshToken, oauthParams);
 }
 
 /**
  * Generate a fully formed uri to use for authentication based on the supplied resource argument
  * @return {string} a fully formed uri with which authentication can be completed
  */
-export function getAuthUrl(credentials: TnsOAuthModule.ITnsOAuthCredentials) : string {
-  return credentials.authority + credentials.authorizeEndpoint +
-    '?client_id=' + credentials.clientId +
-    '&response_type=code' +
-    '&redirect_uri=' + credentials.redirectUri +
-    '&scope=' + credentials.scope +
-    '&response_mode=query' +
-    '&nonce=' + utils.newUUID() +
-    '&state=abcd';
+export function getAuthUrl(credentials: TnsOAuthModule.ITnsOAuthCredentials): string {
+    return credentials.authority + credentials.authorizeEndpoint +
+        '?client_id=' + credentials.clientId +
+        '&response_type=code' +
+        '&redirect_uri=' + credentials.redirectUri +
+        '&scope=' + credentials.scope +
+        '&response_mode=query' +
+        '&nonce=' + utils.newUUID() +
+        '&state=abcd';
 }
 
 export function getTokenFromCache() {
     return TnsOAuthTokenCache.getToken();
 }
 
-export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, successPage?: string) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, successPage?: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;
-      
+
         let checkCodeIntercept = (webView, error, url) => {
             var retStr = '';
 
@@ -94,7 +94,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                     retStr = error.userInfo.allValues[0].absoluteString;
                 } else {
                     retStr = val0;
-                } 
+                }
             } else if (webView.request && webView.request.URL && webView.request.URL.absoluteString) {
                 retStr = webView.request.URL.absoluteString;
             } else if (url) {
@@ -109,25 +109,25 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                     if (codeStr) {
                         try {
                             getTokenFromCode(credentials, codeStr)
-                            .then((response: TnsOAuthModule.ITnsOAuthTokenResult)=>{
-                                TnsOAuthTokenCache.setToken(response);
-                                if (successPage && navCount === 0) {
-                                    let navEntry: frameModule.NavigationEntry = {
-                                        moduleName: successPage,
-                                      clearHistory: true
-                                    };
-                                    frameModule.topmost().navigate(navEntry);
-                                } else {
-                                    frameModule.topmost().goBack();
-                                }
-                                navCount++;
-                                resolve(response);
-                            })
-                            .catch((er)=>{
-                                reject(er);
-                            });
+                                .then((response: TnsOAuthModule.ITnsOAuthTokenResult) => {
+                                    TnsOAuthTokenCache.setToken(response);
+                                    if (successPage && navCount === 0) {
+                                        let navEntry: frameModule.NavigationEntry = {
+                                            moduleName: successPage,
+                                            clearHistory: true
+                                        };
+                                        frameModule.topmost().navigate(navEntry);
+                                    } else {
+                                        frameModule.topmost().goBack();
+                                    }
+                                    navCount++;
+                                    resolve(response);
+                                })
+                                .catch((er) => {
+                                    reject(er);
+                                });
 
-                        } catch(er) {
+                        } catch (er) {
                             console.error('getOAuthAccessToken error occurred...');
                             console.dir(er);
                             reject(er);
@@ -138,24 +138,24 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
         };
 
         let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials));
-        frameModule.topmost().navigate(()=>{return authPage.loginPageFunc()});
+        frameModule.topmost().navigate(() => { return authPage.loginPageFunc() });
     });
 }
 
-export function refreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials) : Promise<TnsOAuthModule.ITnsOAuthTokenResult>  {
+export function refreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         try {
             let oldTokenResult = TnsOAuthTokenCache.getToken();
-                
+
             getTokenFromRefreshToken(credentials, oldTokenResult.refreshToken)
-                .then((response: TnsOAuthModule.ITnsOAuthTokenResult)=>{
+                .then((response: TnsOAuthModule.ITnsOAuthTokenResult) => {
                     TnsOAuthTokenCache.setToken(response);
                     resolve(response);
                 })
-                .catch((er)=>{
+                .catch((er) => {
                     reject(er);
                 });
-        } catch(er) {
+        } catch (er) {
             console.error('refreshToken error occurred...');
             console.dir(er);
             reject(er);
@@ -164,21 +164,21 @@ export function refreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials) :
 }
 
 export function logout(cookieDomains: string[], successPage: string) {
-    let cookieArr = utils.nsArrayToJSArray(NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies);
+    let cookieArr = utils.nsArrayToJSArray(NSHTTPCookieStorage.sharedHTTPCookieStorage.cookies);
     for (var i = 0; i < cookieArr.length; i++) {
         var cookie: NSHTTPCookie = <NSHTTPCookie>cookieArr[i];
         for (var j = 0; j < cookieDomains.length; j++) {
-            if(utils.endsWith(cookie.domain, cookieDomains[j])) {
-                NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie);
+            if (utils.endsWith(cookie.domain, cookieDomains[j])) {
+                NSHTTPCookieStorage.sharedHTTPCookieStorage.deleteCookie(cookie);
             }
         }
     }
     TnsOAuthTokenCache.removeToken();
 
     let navEntry: frameModule.NavigationEntry = {
-                    moduleName: successPage,
-                    clearHistory: true
-                };
+        moduleName: successPage,
+        clearHistory: true
+    };
     frameModule.topmost().navigate(navEntry);
 }
 
@@ -195,12 +195,12 @@ class TnsOAuth {
     private _useAuthorizationHeaderForGET: boolean;
 
     constructor(clientId: string,
-                clientSecret: string,
-                baseSite: string,
-                baseSiteToken: string,
-                authorizePath: string, 
-                accessTokenPath: string, 
-                customHeaders?: any) {
+        clientSecret: string,
+        baseSite: string,
+        baseSiteToken: string,
+        authorizePath: string,
+        accessTokenPath: string,
+        customHeaders?: any) {
         this._clientId = clientId;
         this._clientSecret = clientSecret;
         this._baseSite = baseSite;
@@ -249,76 +249,76 @@ class TnsOAuth {
     };
 
     public getAuthorizeUrl(params) {
-        var params= params || {};
+        var params = params || {};
         params['client_id'] = this._clientId;
         return this._baseSite + this._authorizeUrl + "?" + querystring.stringify(params);
     }
 
-    public getOAuthAccessToken(code, params) : Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+    public getOAuthAccessToken(code, params): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
         //console.log('called TnsOAuth.getOAuthAccessToken');
-        var params= params || {};
+        var params = params || {};
         params['client_id'] = this._clientId;
         if (this._clientSecret && this._clientSecret != '') {
             params['client_secret'] = this._clientSecret;
         }
 
         var codeParam = (params.grant_type === 'refresh_token') ? 'refresh_token' : 'code';
-        params[codeParam]= code;
+        params[codeParam] = code;
 
-        var post_data= querystring.stringify( params );
-        var post_headers= {
+        var post_data = querystring.stringify(params);
+        var post_headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         };
 
-        return new Promise<TnsOAuthModule.ITnsOAuthTokenResult>((resolve, reject)=>{
+        return new Promise<TnsOAuthModule.ITnsOAuthTokenResult>((resolve, reject) => {
             this._request("POST", this.accessTokenUrl, post_headers, post_data, null)
-            .then((response:http.HttpResponse)=>{
-                var results;
-                try {
-                    // As of http://tools.ietf.org/html/draft-ietf-oauth-v2-07
-                    // responses should be in JSON
-                    results = response.content.toJSON();
-                }
-                catch(e) {
-                    // .... However both Facebook + Github currently use rev05 of the spec
-                    // and neither seem to specify a content-type correctly in their response headers :(
-                    // clients of these services will suffer a *minor* performance cost of the exception
-                    // being thrown
-                    results = querystring.parse(response.content.toString());
-                }
-                let access_token = results["access_token"];
-                let refresh_token = results["refresh_token"];
-                let expires_in = results["expires_in"];
-                delete results["refresh_token"];
+                .then((response: http.HttpResponse) => {
+                    var results;
+                    try {
+                        // As of http://tools.ietf.org/html/draft-ietf-oauth-v2-07
+                        // responses should be in JSON
+                        results = response.content.toJSON();
+                    }
+                    catch (e) {
+                        // .... However both Facebook + Github currently use rev05 of the spec
+                        // and neither seem to specify a content-type correctly in their response headers :(
+                        // clients of these services will suffer a *minor* performance cost of the exception
+                        // being thrown
+                        results = querystring.parse(response.content.toString());
+                    }
+                    let access_token = results["access_token"];
+                    let refresh_token = results["refresh_token"];
+                    let expires_in = results["expires_in"];
+                    delete results["refresh_token"];
 
-                let expSecs = Math.floor(parseFloat(expires_in));
-                let expDate = new Date();
-                expDate.setSeconds(expDate.getSeconds() + expSecs);
+                    let expSecs = Math.floor(parseFloat(expires_in));
+                    let expDate = new Date();
+                    expDate.setSeconds(expDate.getSeconds() + expSecs);
 
-                let tokenResult: TnsOAuthModule.ITnsOAuthTokenResult = {
-                    accessToken: access_token, 
-                    refreshToken: refresh_token,
-                    accessTokenExpiration: expDate,
-                    refreshTokenExpiration: expDate
-                };
+                    let tokenResult: TnsOAuthModule.ITnsOAuthTokenResult = {
+                        accessToken: access_token,
+                        refreshToken: refresh_token,
+                        accessTokenExpiration: expDate,
+                        refreshTokenExpiration: expDate
+                    };
 
-                resolve(tokenResult);
-            })
-            .catch((er)=>{
-                reject(er);
-            });
+                    resolve(tokenResult);
+                })
+                .catch((er) => {
+                    reject(er);
+                });
         });
     }
 
-    private _request(method, url, headers, post_body, access_token) : Promise<http.HttpResponse> {
+    private _request(method, url, headers, post_body, access_token): Promise<http.HttpResponse> {
         var parsedUrl = URL.parse(url, true);
 
-        var realHeaders= {};
+        var realHeaders = {};
         for (var key in this._customHeaders) {
             realHeaders[key] = this._customHeaders[key];
         }
         if (headers) {
-            for(var key in headers) {
+            for (var key in headers) {
                 realHeaders[key] = headers[key];
             }
         }
@@ -333,7 +333,7 @@ class TnsOAuth {
 
         var queryStr = querystring.stringify(parsedUrl.query);
         if (queryStr) {
-            queryStr =  "?" + queryStr;
+            queryStr = "?" + queryStr;
         }
         var options = {
             host: parsedUrl.hostname,
@@ -346,7 +346,7 @@ class TnsOAuth {
         return this._executeRequest(options, url, post_body);
     }
 
-    private _executeRequest(options, url, post_body) : Promise<http.HttpResponse> {
+    private _executeRequest(options, url, post_body): Promise<http.HttpResponse> {
         var promise = http.request({
             url: url,
             method: options.method,
