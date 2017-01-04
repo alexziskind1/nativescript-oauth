@@ -61,7 +61,7 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 ###### For Office365 login, include the following lines
 
 ```js
-var o365InitOptions : tnsOAuthModule.TnsOAuthOptionsOffice365 = {
+var o365InitOptions : tnsOAuthModule.ITnsOAuthOptionsOffice365 = {
     clientId: 'e392f6aa-da5c-434d-a42d-a0e0a27d3955', //client id for application (GUID)
     scope: ['Files.ReadWrite', 'offline_access'] //whatever other scopes you need
 };
@@ -73,7 +73,7 @@ tnsOAuthModule.initOffice365(o365InitOptions);
 ###### For Facebook login, include the following lines
 
 ```js
-var facebookInitOptions : tnsOAuthModule.TnsOAuthOptionsFacebook = {
+var facebookInitOptions : tnsOAuthModule.ITnsOAuthOptionsFacebook = {
     clientId: '1119818654921555',
     clientSecret: 'bbb58f212b51e4d555bed857171c9aaa',
     scope: ['email'] //whatever other scopes you need
