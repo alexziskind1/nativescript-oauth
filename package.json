@@ -1,6 +1,6 @@
 {
   "name": "nativescript-oauth",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
   "nativescript": {
@@ -44,6 +44,10 @@
       "name": "Kevin Primm",
       "email": "kfprimm@gmail.com",
       "url": "https://github.com/kfprimm"
+    },
+    {
+      "name": "Toma Nikolov",
+      "url": "https://github.com/TomaNikolov"
     }
   ],
   "bugs": {
