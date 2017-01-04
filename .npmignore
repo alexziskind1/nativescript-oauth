@@ -1,7 +1,6 @@
 demo/
 node_modules/
 hooks/
-*.png
 *.log
 *.ts
 *.js.map

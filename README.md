@@ -4,7 +4,8 @@ Library for interacting with OAuth 2.0 in NativeScript applications that provide
 
 ***NEW:*** **Now with Android Support!**
 
-<img src="docs/images/nativescript-oauth-logo.png" alt="NativeScript OAuth 2"/><br/>
+<img src="https://raw.githubusercontent.com/alexziskind1/nativescript-oauth/master/docs/images/nativescript-oauth-logo.png" alt="NativeScript OAuth 2"/>
+<br/>
 
 Tested against Microsoft Live, Office 365, Microsoft Graph API, and Facebook.
 
