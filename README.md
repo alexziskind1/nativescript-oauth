@@ -26,11 +26,13 @@ Register your mobile app [here](https://apps.dev.microsoft.com). This will requi
 ### Facebook account
 For logging in with your Facebook account, you should have a Facebook developer account. If you don't have one yet, you can get one [here](https://developers.facebook.com/).
 
+Keep an eye out on my [YouTube channel](https://www.youtube.com/c/AlexanderZiskind) for a video on how to set up Facebook with with plugin.
+
 Register your mobile app by following the wizard under "My Apps" -> "Add a new app".
 
 1. Go to https://developers.facebook.com/apps and create a new app
 2. If you see the Product Setup page, select Facebook login
-3. Under the Client OAuth section, enter ```https://www.facebook.com/connect/login_success.html``` as your Valid OAuth redirect URIs
+3. Make sure to turn ON the option "Embedded Browser OAuth Login"
 4. Click Save
 5. Copy the App ID and the App Secret from the Dashboard page to bootstrap your app. These will be the ClientID and CLientSecret respectively.
 
@@ -42,16 +44,22 @@ Add TypeScript to your NativeScript project if you don't already have it added. 
 From the command prompt go to your app's root folder and execute:
 
 ```
-tns plugin add nativescript-oauth
+npm install nativescript-oauth --save
 ```
 
 
 ## Usage
 
-If you want a quickstart, [get the demo app here](https://github.com/alexziskind1/nativescript-oauth/tree/master/demo).
+If you want a quickstart, you can start with one of two demo apps: 
+- [TypeScript Demo App](https://github.com/alexziskind1/nativescript-oauth/tree/master/demo)
+- [Angular Demo App](https://github.com/alexziskind1/nativescript-oauth/tree/master/demo-angular)
+
 
 ### Bootstrapping
-We need to do some wiring when your app starts, so open `app.ts` and add this before `application.start();`:
+We need to do some wiring when your app starts. If you are not using Angular, open `app.ts` and add the following code before `application.start();`
+
+If you are using Angular, then open your `main.ts` file and add the following code before `platformNativeScriptDynamic().bootstrapModule(AppModule);`
+
 
 ##### TypeScript
 ```js
@@ -84,7 +92,7 @@ tnsOAuthModule.initFacebook(facebookInitOptions);
 
 ### Logging in
 
-In your view controller (or wherever you will have a handler to respond to the login user action) you will reference the ```nativescript-oauth``` module again and call the ```login``` function.
+In your view controller or component (or wherever you will have a handler to respond to the login user action) you will reference the ```nativescript-oauth``` module again and call the ```login``` function.
 
 ```js
 import * as tnsOAuthModule from 'nativescript-oauth';
@@ -118,7 +126,7 @@ tnsOAuthModule.ensureValidToken()
 2. Clone your fork
 3. Change directory to ```nativescript-oauth```
 4. Run ```npm install``` to install all npm packages for the plugin
-5. Change directory to ```demo```
+5. Change directory to ```demo``` or ```demo-angular```
 6. Run ```npm install``` to install all npm packages for the demo project
 7. Replace the ClientId in the app.ts file of the demo with your own ClientId
 8. Run the demo project
