@@ -6,23 +6,23 @@ import * as tnsOAuthModule from 'nativescript-oauth';
     templateUrl: "app.component.html",
 })
 export class AppComponent {
-    public counter: number = 16;
 
-    public get message(): string {
-        if (this.counter > 0) {
-            return this.counter + " taps left";
-        } else {
-            return "Hoorraaay! \nYou are ready to start building!";
-        }
-    }
-
-    public onTap() {
+    public onTapLogin() {
         tnsOAuthModule.ensureValidToken()
             .then((token: string) => {
                 console.log('token: ' + token);
             })
             .catch((er) => {
-                console.error('error');
+                console.error('error logging in');
+                console.dir(er);
+            });
+    }
+
+    public onTapLogout() {
+        tnsOAuthModule.logout()
+            .then(() => console.log('logged out'))
+            .catch((er) => {
+                console.error('error logging out');
                 console.dir(er);
             });
     }

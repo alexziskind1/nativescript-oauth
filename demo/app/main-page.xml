@@ -1,8 +1,8 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
   <StackLayout>
-    <Label text="Login and get data" class="login-title"/>
-    <Button text="Microsoft Account" class="btn-login-ms"  tap="{{ onMicrosoftTap }}"/>
 
-    <Button text="Get data" tap="{{ onTapGetData }}" />
+    <Button text="Login"  tap="{{ onTapLogin }}"/>
+
+    <Button text="Logout" tap="{{ onTapLogout }}" />
   </StackLayout>
 </Page>

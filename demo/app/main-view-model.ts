@@ -1,4 +1,4 @@
-import {Observable} from 'data/observable';
+import { Observable } from 'data/observable';
 import * as frameModule from "ui/frame";
 import * as tnsOAuthModule from 'nativescript-oauth';
 
@@ -9,27 +9,24 @@ export class HelloWorldModel extends Observable {
     super();
   }
 
-  public onMicrosoftTap() {
-    tnsOAuthModule.login()
-      .then(()=>{
-        console.log('logged in');
-        console.dir("accessToken " + tnsOAuthModule.accessToken());
-        //frameModule.topmost().navigate('explorer');
-      })
-      .catch((er)=>{
-          console.error('error');
-          console.dir(er);
-      });
-  }
-
-  public onTapGetData() {
+  public onTapLogin() {
     tnsOAuthModule.ensureValidToken()
-      .then((token: string)=>{
-          console.log('token: ' + token);
+      .then((token: string) => {
+        console.log('token: ' + token);
       })
-      .catch((er)=>{
-        console.error('error');
+      .catch((er) => {
+        console.error('error logging in');
         console.dir(er);
       });
   }
+
+  public onTapLogout() {
+    tnsOAuthModule.logout()
+      .then(() => console.log('logged out'))
+      .catch((er) => {
+        console.error('error logging out');
+        console.dir(er);
+      });
+  }
+
 }
