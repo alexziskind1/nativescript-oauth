@@ -11,7 +11,7 @@ export class AuthHelperFacebook extends AuthHelper implements TnsOAuth.ITnsAuthH
     var scopeStr = scope.join('%20');
     this.credentials = {
       authority: 'https://www.facebook.com/dialog',
-      tokenEndpointBase: 'https://graph.facebook.com', 
+      tokenEndpointBase: 'https://graph.facebook.com',
       authorizeEndpoint: '/oauth',
       tokenEndpoint: '/v2.3/oauth/access_token',
       clientId: clientId,
@@ -21,7 +21,7 @@ export class AuthHelperFacebook extends AuthHelper implements TnsOAuth.ITnsAuthH
     };
   }
 
-  public logout(successPage: string) {
+  public logout(successPage?: string): Promise<void> {
     let cookieDomains = [".facebook.com"]; //need to double check this
     return this._logout(successPage, cookieDomains);
   }

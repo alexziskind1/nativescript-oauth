@@ -9,9 +9,9 @@ import { AuthHelperFacebook } from './auth-helper-facebook';
 import { AuthHelperGoogle } from './auth-helper-google';
 import * as TnsOAuth from './tns-oauth-interfaces';
 
-export var instance : TnsOAuth.ITnsAuthHelper = null;
+export var instance: TnsOAuth.ITnsAuthHelper = null;
 
-export function initOffice365(options: TnsOAuth.ITnsOAuthOptionsOffice365) : Promise<any> {
+export function initOffice365(options: TnsOAuth.ITnsOAuthOptionsOffice365): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
             if (instance !== null) {
@@ -28,7 +28,7 @@ export function initOffice365(options: TnsOAuth.ITnsOAuthOptionsOffice365) : Pro
     });
 }
 
-export function initFacebook(options: TnsOAuth.ITnsOAuthOptionsFacebook) : Promise<any> {
+export function initFacebook(options: TnsOAuth.ITnsOAuthOptionsFacebook): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
             if (instance !== null) {
@@ -45,7 +45,7 @@ export function initFacebook(options: TnsOAuth.ITnsOAuthOptionsFacebook) : Promi
     });
 }
 
-export function initGoogle(options: TnsOAuth.ITnsOAuthOptionsGoogle) : Promise<any> {
+export function initGoogle(options: TnsOAuth.ITnsOAuthOptionsGoogle): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
             if (instance !== null) {
@@ -62,37 +62,37 @@ export function initGoogle(options: TnsOAuth.ITnsOAuthOptionsGoogle) : Promise<a
     });
 }
 
-export function accessToken() : string {
+export function accessToken(): string {
     return instance.tokenResult.accessToken;
 }
 
-export function login(successPage?: string) : Promise<string> {
+export function login(successPage?: string): Promise<string> {
     return instance.login(successPage);
 }
-export function logout(successPage: string) : Promise<any> {
+export function logout(successPage?: string): Promise<void> {
     return instance.logout(successPage);
 }
-export function accessTokenExpired() : boolean {
+export function accessTokenExpired(): boolean {
     return instance.accessTokenExpired();
 }
 
-export function ensureValidToken() : Promise<string>  {
-    return new Promise((resolve, reject)=>{
+export function ensureValidToken(): Promise<string> {
+    return new Promise((resolve, reject) => {
         if (instance.accessTokenExpired()) {
             if (instance.refreshTokenExpired()) {
                 login()
-                    .then((response: string)=>{
+                    .then((response: string) => {
                         resolve(response);
                     })
-                    .catch((er)=>{
+                    .catch((er) => {
                         reject(er);
                     });
             } else {
                 instance.refreshToken()
-                    .then((result: string)=>{
+                    .then((result: string) => {
                         resolve(result);
                     })
-                    .catch((er)=>{
+                    .catch((er) => {
                         reject(ErrorEvent);
                     });
             }

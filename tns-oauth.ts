@@ -163,7 +163,7 @@ export function refreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials): 
     });
 }
 
-export function logout(cookieDomains: string[], successPage: string) {
+export function logout(cookieDomains: string[], successPage?: string) {
     let cookieArr = utils.nsArrayToJSArray(NSHTTPCookieStorage.sharedHTTPCookieStorage.cookies);
     for (var i = 0; i < cookieArr.length; i++) {
         var cookie: NSHTTPCookie = <NSHTTPCookie>cookieArr[i];
@@ -175,11 +175,13 @@ export function logout(cookieDomains: string[], successPage: string) {
     }
     TnsOAuthTokenCache.removeToken();
 
-    let navEntry: frameModule.NavigationEntry = {
-        moduleName: successPage,
-        clearHistory: true
-    };
-    frameModule.topmost().navigate(navEntry);
+    if (successPage) {
+        let navEntry: frameModule.NavigationEntry = {
+            moduleName: successPage,
+            clearHistory: true
+        };
+        frameModule.topmost().navigate(navEntry);
+    }
 }
 
 class TnsOAuth {

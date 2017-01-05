@@ -5,7 +5,7 @@ export interface ITnsAuthHelper {
     credentials: ITnsOAuthCredentials;
     tokenResult: ITnsOAuthTokenResult;
     login: (successPage?: string) => Promise<string>;
-    logout: (successPage: string) => Promise<{}>;
+    logout: (successPage?: string) => Promise<void>;
     refreshToken: () => Promise<string>;
     accessTokenExpired: () => boolean;
     refreshTokenExpired: () => boolean;

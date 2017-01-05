@@ -5,7 +5,7 @@ import { AuthHelper } from './auth-helper';
 import * as TnsOAuth from './tns-oauth-interfaces';
 
 export class AuthHelperOffice365 extends AuthHelper implements TnsOAuth.ITnsAuthHelper {
-  
+
   constructor(clientId: string, scope: Array<string>) {
     super();
     var scopeStr = scope.join('%20');
@@ -19,7 +19,7 @@ export class AuthHelperOffice365 extends AuthHelper implements TnsOAuth.ITnsAuth
     };
   }
 
-  public logout(successPage: string) {
+  public logout(successPage?: string): Promise<void> {
     let cookieDomains = ["login.microsoftonline.com", ".live.com"];
     return this._logout(successPage, cookieDomains);
   }

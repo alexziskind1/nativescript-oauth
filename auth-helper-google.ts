@@ -5,7 +5,7 @@ import { AuthHelper } from './auth-helper';
 import * as TnsOAuth from './tns-oauth-interfaces';
 
 export class AuthHelperGoogle extends AuthHelper implements TnsOAuth.ITnsAuthHelper {
-  
+
   constructor(clientId: string, scope: Array<string>) {
     super();
     var scopeStr = scope.join('%20');
@@ -19,7 +19,7 @@ export class AuthHelperGoogle extends AuthHelper implements TnsOAuth.ITnsAuthHel
     };
   }
 
-  public logout(successPage: string) {
+  public logout(successPage?: string): Promise<void> {
     let cookieDomains = [".google.com"]; //need to double check this
     return this._logout(successPage, cookieDomains);
   }
