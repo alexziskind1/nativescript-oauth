@@ -6,7 +6,10 @@
   "nativescript": {
     "id": "org.nativescript.demoangular",
     "tns-ios": {
-      "version": "2.4.0"
+      "version": "2.5.0"
+    },
+    "tns-android": {
+      "version": "2.5.0"
     }
   },
   "dependencies": {
@@ -19,16 +22,20 @@
     "@angular/platform-browser-dynamic": "2.2.1",
     "@angular/router": "3.2.1",
     "nativescript-angular": "1.2.0",
-    "nativescript-oauth": "file:..",
+    "nativescript-oauth": "1.2.1",
     "nativescript-theme-core": "^0.2.1",
     "reflect-metadata": "~0.1.8",
     "rxjs": "5.0.0-beta.12",
-    "tns-core-modules": "2.4.4"
+    "tns-core-modules": "2.5.0"
   },
   "devDependencies": {
+    "babel-traverse": "6.22.1",
+    "babel-types": "6.22.0",
+    "babylon": "6.15.0",
+    "lazy": "1.0.11",
     "nativescript-dev-android-snapshot": "^0.*.*",
-    "nativescript-dev-typescript": "^0.3.2",
-    "typescript": "~2.0.10",
+    "nativescript-dev-typescript": "^0.3.7",
+    "typescript": "2.1.5",
     "zone.js": "~0.6.21"
   }
 }
