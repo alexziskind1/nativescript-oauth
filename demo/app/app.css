@@ -1,22 +1,20 @@
-﻿.login-title {
-    margin-top: 30;
-    color: #666666;
-    font-size: 14;
-    horizontal-align: center;
+﻿/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+For example, the following CSS rule changes the font size of all UI
+components that have the btn class name.
+*/
+.btn {
+    font-size: 18;
 }
 
-.btn-login-ms {
-    background-image: url('res://microsoft_logo_squares');
-    background-size: 20 20;
-    background-position: 10 10;
-    background-repeat: no-repeat;
-    padding-left: 40;
-    padding-right: 10;
-    padding-top: 10;
-    padding-bottom: 10;
-    border-width: 1;
-    border-color: red;
-    border-radius: 2;
-    horizontal-align: center;
-    margin-top:40;
-}
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+@import 'nativescript-theme-core/css/core.light.css';

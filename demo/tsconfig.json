@@ -2,15 +2,14 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
-        "sourceMap": true,
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "noEmitHelpers": true,
-        "lib": [
-            "es2016"
-        ]
+        "noEmitOnError": true
     },
     "exclude": [
         "node_modules",
-        "platforms"
+        "platforms",
+        "**/*.aot.ts"
     ]
 }

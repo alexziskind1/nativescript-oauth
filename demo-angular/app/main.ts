@@ -7,7 +7,7 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 
 
 var o365InitOptions: tnsOAuthModule.ITnsOAuthOptionsOffice365 = {
-    clientId: '99e1c318-a133-482f-a53b-5122ceab4c00', //client id for application (GUID)
+    clientId: '67e1c318-a133-432f-a53b-5122ceab4c08', //client id for application (GUID)
     scope: ['Files.ReadWrite', 'User.ReadWrite', 'offline_access']
 };
 
@@ -17,8 +17,8 @@ var facebookInitOptions: tnsOAuthModule.ITnsOAuthOptionsFacebook = {
     scope: ['email']
 };
 
-//tnsOAuthModule.initOffice365(o365InitOptions);
-tnsOAuthModule.initFacebook(facebookInitOptions);
+tnsOAuthModule.initOffice365(o365InitOptions);
+//tnsOAuthModule.initFacebook(facebookInitOptions);
 
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);
