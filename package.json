@@ -1,12 +1,12 @@
 {
   "name": "nativescript-oauth",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
   "nativescript": {
     "platforms": {
-      "ios": "2.4.0",
-      "android": "2.4.1"
+      "ios": "2.5.0",
+      "android": "2.5.0"
     }
   },
   "scripts": {
@@ -64,8 +64,8 @@
     "querystring": "^0.2.0"
   },
   "devDependencies": {
-    "nativescript-dev-typescript": "^0.3.2",
-    "tns-core-modules": "^2.4.4",
+    "nativescript-dev-typescript": "^0.3.5",
+    "tns-core-modules": "^2.5.0",
     "typescript": "^2.1.4"
   }
 }
