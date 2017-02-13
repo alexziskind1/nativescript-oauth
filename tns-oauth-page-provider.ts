@@ -9,7 +9,7 @@ import { TnsOAuthWebViewHelper } from './tns-oauth-webview-helper';
 
 
 export class TnsOAuthPageProvider {
-    private _checkCodeIntercept: ()=>{};
+    private _checkCodeIntercept: (WebView, error?, url?) => boolean;
     private _authUrl: string;
 
     constructor(checkCodeIntercept, authUrl) {

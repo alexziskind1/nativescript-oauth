@@ -1,13 +1,13 @@
 /// <reference path="references.d.ts" />
 
-import { WebView  } from 'ui/web-view';
+import { WebView } from 'ui/web-view';
 
-export class TnsOAuthWebViewHelper extends NSObject implements UIWebViewDelegate { 
+export class TnsOAuthWebViewHelper extends NSObject implements UIWebViewDelegate {
     public static ObjCProtocols = [UIWebViewDelegate];
 
     private _owner: WeakRef<WebView>;
     private _origDelegate: any; //UIWebViewDelegateImpl
-    private _checkCodeIntercept;
+    private _checkCodeIntercept: (WebView, error?, url?) => boolean;
 
     constructor() {
         super();
