@@ -7,6 +7,9 @@
     "platforms": {
       "ios": "2.5.0",
       "android": "2.5.0"
+    },
+    "tns-ios": {
+      "version": "2.5.0"
     }
   },
   "scripts": {
@@ -18,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexziskind1/nativescript-oauth.git"
+    "url": "https://github.com/ExelonPredix/nativescript-oauth.git"
   },
   "typescript": {
     "definition": "index.d.ts"
@@ -60,8 +63,8 @@
   "homepage": "https://github.com/alexziskind1/nativescript-oauth",
   "readmeFilename": "README.md",
   "dependencies": {
-    "url": "^0.11.0",
-    "querystring": "^0.2.0"
+    "querystring": "^0.2.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "nativescript-dev-typescript": "^0.3.5",
