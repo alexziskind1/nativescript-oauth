@@ -34,6 +34,13 @@ export interface ITnsOAuthOptions {
     scope: string[];
 }
 
+
+export interface ITnsOAuthOptionsUaa {
+    clientId: string;
+    clientSecret: string;
+    scope: string[];
+}
+
 export interface ITnsOAuthOptionsOffice365 extends ITnsOAuthOptions {
 }
 
