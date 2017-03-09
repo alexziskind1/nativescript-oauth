@@ -22,6 +22,10 @@ export interface ITnsOAuthCredentials {
     scope: string;
 }
 
+export interface ITnsOAuthCredentialsUaa extends ITnsOAuthCredentials {
+    basicAuthHeader: string;
+}
+
 export interface ITnsOAuthTokenResult {
     accessToken: string;
     refreshToken: string;
@@ -49,4 +53,5 @@ export interface ITnsOAuthOptionsUaa extends ITnsOAuthOptions {
     redirectUri: string;
     clientSecret: string;
     cookieDomains: string[];
+    basicAuthHeader: string;
 }

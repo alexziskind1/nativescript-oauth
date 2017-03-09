@@ -72,7 +72,7 @@ export function initUaa(options: TnsOAuth.ITnsOAuthOptionsUaa): Promise<any> {
                 return;
             }
 
-            instance = new AuthHelperUaa(options.authority, options.redirectUri, options.clientId, options.clientSecret, options.scope, options.cookieDomains);
+            instance = new AuthHelperUaa(options.authority, options.redirectUri, options.clientId, options.clientSecret, options.scope, options.cookieDomains, options.basicAuthHeader);
             resolve(instance);
         } catch (ex) {
             console.log("Error in AuthHelperUaa.init: " + ex);
