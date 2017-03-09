@@ -1,16 +1,22 @@
 import { Component } from "@angular/core";
 import * as tnsOAuthModule from 'nativescript-oauth';
+import * as dialogs from 'ui/dialogs';
 
 @Component({
     selector: "my-app",
     templateUrl: "app.component.html",
 })
 export class AppComponent {
-
+        
     public onTapLogin() {
         tnsOAuthModule.ensureValidToken()
             .then((token: string) => {
-                console.log('token: ' + token);
+                console.log('here');
+                console.log('token: ', token);
+                dialogs.alert('Got a token:' + token).then(()=> {
+                    console.log('Dialog closed!');
+                });
+
             })
             .catch((er) => {
                 console.error('error logging in');
@@ -25,5 +31,14 @@ export class AppComponent {
                 console.error('error logging out');
                 console.dir(er);
             });
+    }
+
+    public onTapCallApi() {
+
+        
+    }
+
+    public onauthcallback() {
+        console.log('yay callback');
     }
 }
