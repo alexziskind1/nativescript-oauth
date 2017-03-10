@@ -19,7 +19,7 @@ export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
 function getAuthHeaderFromCredentials(credentials: TnsOAuthModule.ITnsOAuthCredentials) {
     let customAuthHeader: any;
     if (credentials['basicAuthHeader']) {
-        customAuthHeader = {'AUTHORIZATION': credentials['basicAuthHeader']};
+        customAuthHeader = {'Authorization': credentials['basicAuthHeader']};
     } 
 
     return customAuthHeader;
@@ -300,7 +300,6 @@ class TnsOAuth {
     }
 
     public getOAuthAccessToken(code, params): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
-        //console.log('called TnsOAuth.getOAuthAccessToken');
         var params = params || {};
         params['client_id'] = this._clientId;
         if (this._clientSecret && this._clientSecret != '') {
