@@ -1,6 +1,6 @@
 {
   "name": "nativescript-oauth",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
   "nativescript": {
@@ -14,14 +14,14 @@
   },
   "scripts": {
     "build": "tsc",
-    "demo.ios": "npm run preparedemo && cd demo && tns emulate ios",
-    "demo.android": "npm run preparedemo && cd demo && tns run android",
-    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-oauth && tns plugin add .. && tns install",
-    "setup": "cd demo && npm install && cd .. && npm run build && cd demo && tns plugin add .. && cd .."
+    "demo.ios": "npm run preparedemo && cd demo-angular && tns emulate ios",
+    "demo.android": "npm run preparedemo && cd demo-angular && tns run android",
+    "preparedemo": "npm run build && cd demo-angular && tns plugin remove nativescript-oauth && tns plugin add .. && tns install",
+    "setup": "cd demo-angular && npm install && cd .. && npm run build && cd demo-angular && tns plugin add .. && cd .."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ExelonPredix/nativescript-oauth.git"
+    "url": "https://github.com/alexziskind1/nativescript-oauth.git"
   },
   "typescript": {
     "definition": "index.d.ts"
