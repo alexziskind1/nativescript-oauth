@@ -38,7 +38,7 @@ export class AppComponent {
         
     }
 
-    public onauthcallback() {
+    public authcallback() {
         console.log('yay callback');
     }
 }
