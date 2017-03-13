@@ -17,20 +17,21 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 //     scope: ['email']
 // };
 
-let uaaInitOptions: tnsOAuthModule.ITnsOAuthOptionsUaa = {
-    authority: 'https://5abc6901-aa46-41af-8870-7aaf4290d610.predix-uaa.run.aws-usw02-pr.ice.predix.io',
-    redirectUri: 'udentifyclient://authcallback',
-    clientId: 'udentify_client',
-    clientSecret: 'udentify_client',
-    scope: ['uaa.resource', 'uaa.user'],
-    cookieDomains: ["udentifyclient://"],
-    basicAuthHeader: "Basic dWRlbnRpZnlfY2xpZW50OnVkZW50aWZ5X2NsaWVudA=="
-    
-}
+
 
 // tnsOAuthModule.initOffice365(o365InitOptions);
 // tnsOAuthModule.initFacebook(facebookInitOptions);
 
+let uaaInitOptions: tnsOAuthModule.ITnsOAuthOptionsUaa = {
+    authority: '',
+    redirectUri: '',
+    clientId: '',
+    clientSecret: '',
+    scope: ['uaa.resource', 'uaa.user'],
+    cookieDomains: [''],
+    basicAuthHeader: ''
+    
+}
 
 tnsOAuthModule.initUaa(uaaInitOptions);
 
