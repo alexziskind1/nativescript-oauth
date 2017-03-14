@@ -15,17 +15,32 @@ import * as TnsOAuthModule from './tns-oauth-interfaces';
 export var ACCESS_TOKEN_CACHE_KEY = 'ACCESS_TOKEN_CACHE_KEY';
 export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
 
+
+function getAuthHeaderFromCredentials(credentials: TnsOAuthModule.ITnsOAuthCredentials) {
+    let customAuthHeader: any;
+    if (credentials['basicAuthHeader']) {
+        customAuthHeader = {'Authorization': credentials['basicAuthHeader']};
+    } 
+
+    return customAuthHeader;
+}
+
+
 /**
  * Gets a token for a given resource.
  */
 function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+    
+    let customAuthHeader: any = getAuthHeaderFromCredentials(credentials);
+    
     let oauth2 = new TnsOAuth(
         credentials.clientId,
         credentials.clientSecret,
         credentials.authority,
         credentials.tokenEndpointBase,
         credentials.authorizeEndpoint,
-        credentials.tokenEndpoint
+        credentials.tokenEndpoint,
+        customAuthHeader
     );
 
     let oauthParams = {
@@ -43,13 +58,17 @@ function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code
  * Gets a new access token via a previously issued refresh token.
  */
 export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials, refreshToken: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+    
+    let customAuthHeader: any = getAuthHeaderFromCredentials(credentials);
+    
     var oauth2 = new TnsOAuth(
         credentials.clientId,
         credentials.clientSecret,
         credentials.authority,
         credentials.tokenEndpointBase,
         credentials.authorizeEndpoint,
-        credentials.tokenEndpoint
+        credentials.tokenEndpoint,
+        customAuthHeader
     );
 
     let oauthParams = {
@@ -281,7 +300,6 @@ class TnsOAuth {
     }
 
     public getOAuthAccessToken(code, params): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
-        //console.log('called TnsOAuth.getOAuthAccessToken');
         var params = params || {};
         params['client_id'] = this._clientId;
         if (this._clientSecret && this._clientSecret != '') {

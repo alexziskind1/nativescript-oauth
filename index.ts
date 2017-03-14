@@ -7,6 +7,7 @@ import * as utils from 'utils/utils';
 import { AuthHelperOffice365 } from './auth-helper-office365';
 import { AuthHelperFacebook } from './auth-helper-facebook';
 import { AuthHelperGoogle } from './auth-helper-google';
+import { AuthHelperUaa } from './auth-helper-uaa';
 import * as TnsOAuth from './tns-oauth-interfaces';
 
 export var instance: TnsOAuth.ITnsAuthHelper = null;
@@ -57,6 +58,24 @@ export function initGoogle(options: TnsOAuth.ITnsOAuthOptionsGoogle): Promise<an
             resolve(instance);
         } catch (ex) {
             console.log("Error in AuthHelperFacebook.init: " + ex);
+            reject(ex);
+        }
+    });
+}
+
+
+export function initUaa(options: TnsOAuth.ITnsOAuthOptionsUaa): Promise<any> {
+    return new Promise(function (resolve, reject) {
+        try {
+            if (instance !== null) {
+                reject("You already ran init");
+                return;
+            }
+
+            instance = new AuthHelperUaa(options.authority, options.redirectUri, options.clientId, options.clientSecret, options.scope, options.cookieDomains, options.basicAuthHeader);
+            resolve(instance);
+        } catch (ex) {
+            console.log("Error in AuthHelperUaa.init: " + ex);
             reject(ex);
         }
     });
