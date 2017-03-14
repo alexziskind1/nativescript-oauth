@@ -147,10 +147,11 @@ tnsOAuthModule.ensureValidToken()
 ## Contributing
 
 1. Fork the nativescript-oauth repository on GitHub
-2. Clone your fork
-3. Change directory to ```nativescript-oauth```
-4. Run ```npm install``` to install all npm packages for the plugin
-5. Change directory to ```demo``` or ```demo-angular```
-6. Run ```npm install``` to install all npm packages for the demo project
-7. Replace the ClientId in the app.ts file of the demo with your own ClientId
-8. Run the demo project
+1. Clone your fork
+1. Change directory to ```nativescript-oauth```
+1. Run ```npm install``` in the root folder to install all npm packages for the plugin
+1. Run `tsc` in the root folder to build the plugin TypeScript
+1. Edit the `/demo/package.json` file: `"nativescript-oauth" : "../"` - this will point the demo project to use the local oauth plugin instead of the one hosted on npm.
+1. Run ```npm install``` in the `demo` folder to install all npm packages for the demo (these are also shared by the plugin, so they are needed to build)
+1. Replace the ClientId in the app.ts file of the demo with your own ClientId
+1. Run the demo project
