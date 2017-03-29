@@ -1,13 +1,13 @@
 # OAuth 2 login plugin for NativeScript
 
-Library for interacting with OAuth 2.0 in NativeScript applications that provides simplified client access with a OAuth providers that support the OAuth 2.0 protocol such as Microsoft Live accounts, Microsoft Graph, Office 365, Facebook, Cloud Foundry UAA instances and Google (Google is a work in progress due to some of their restrictions).
+Library for interacting with OAuth 2.0 in NativeScript applications that provides simplified client access with a OAuth providers that support the OAuth 2.0 protocol such as Microsoft Live accounts, Microsoft Graph, Office 365, Facebook, Cloud Foundry UAA instances, LinkedIn, and Google (Google is a work in progress due to some of their restrictions).
 
 ***NEW:*** **Now with Android Support!**
 
 <img src="https://raw.githubusercontent.com/alexziskind1/nativescript-oauth/master/docs/images/nativescript-oauth-logo.png" alt="NativeScript OAuth 2"/>
 <br/>
 
-Tested against Microsoft Live, Office 365, Microsoft Graph API, Facebook and private instances of UAA.
+Tested against Microsoft Live, Office 365, Microsoft Graph API, Facebook, LinkedIn and private instances of UAA.
 
 ## Prerequisites
 
@@ -35,6 +35,16 @@ Register your mobile app by following the wizard under "My Apps" -> "Add a new a
 3. Make sure to turn ON the option "Embedded Browser OAuth Login"
 4. Click Save
 5. Copy the App ID and the App Secret from the Dashboard page to bootstrap your app. These will be the ClientID and CLientSecret respectively.
+
+### LinkedIn Account 
+For logging in with your LinkedIn account, you should have a LinkedIn developer account. If you don't have one yet, you can get one [here](https://developer.linkedin.com/).
+1. Click on `My Apps` and login with your LinkedIn credentials or click on Join Now to create a new account.
+2. Once logged in click on `Create Application`.
+3. Fill out all fields with the app's information and Click `submit`.
+4. If everything goes well you should get your app's authentication keys which consists of a client id and a client secret.
+5. In this page, make sure to add an `Authorized Redirect URL`. (This can be any url starting with http:// or https://). 
+6. Copy the Authentication Keys and the Authorized Redirect URL.
+
 
 ### Cloud Foundry User Account and Authentication (UAA) 
 
@@ -112,6 +122,19 @@ var uaaInitOptions: tnsOAuthModule.ITnsOAuthOptionsUaa = {
 
 tnsOAuthModule.initUaa(uaaInitOptions);
 
+```
+
+
+###### For LinkedIn login, include the following lines
+
+```js
+var linkedInInitOptions : tnsOAuthModule.ITnsOAuthOptionsLinkedIn = {
+    clientId: '',
+    clientSecret: '',
+    scope: ['r_basicprofile'] //Leave blank and the default scopes will be used 
+};
+
+tnsOAuthModule.initLinkedIn(linkedInInitOptions);
 ```
 
 ### Logging in

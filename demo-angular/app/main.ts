@@ -22,18 +22,25 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 // tnsOAuthModule.initOffice365(o365InitOptions);
 // tnsOAuthModule.initFacebook(facebookInitOptions);
 
-let uaaInitOptions: tnsOAuthModule.ITnsOAuthOptionsUaa = {
-    authority: '',
-    redirectUri: '',
-    clientId: '',
-    clientSecret: '',
-    scope: ['uaa.resource', 'uaa.user'],
-    cookieDomains: [''],
-    basicAuthHeader: ''
+// let uaaInitOptions: tnsOAuthModule.ITnsOAuthOptionsUaa = {
+//    authority: '',
+//    redirectUri: '',
+//    clientId: '',
+//    clientSecret: '',
+//    scope: ['uaa.resource', 'uaa.user'],
+//    cookieDomains: [''],
+//    basicAuthHeader: ''
     
-}
+//};
 
-tnsOAuthModule.initUaa(uaaInitOptions);
+//tnsOAuthModule.initUaa(uaaInitOptions);
 
+var linkedInInitOptions: tnsOAuthModule.ITnsOAuthOptionsLinkedIn = {
+    clientId: '<your_client_id>',				    // Add your client id
+    clientSecret: '<your_client_secret>',			// Add your client secret
+    scope: ['r_basicprofile']	// Do not include if you want the default scopes
+};
+
+tnsOAuthModule.initLinkedIn(linkedInInitOptions);
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);
