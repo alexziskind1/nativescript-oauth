@@ -92,7 +92,7 @@ export function initLinkedIn(options: TnsOAuth.ITnsOAuthOptionsLinkedIn): Promis
                 return;
             }
 
-            instance = new AuthHelperLinkedIn(options.clientId, options.clientSecret, options.scope);
+            instance = new AuthHelperLinkedIn(options.clientId, options.clientSecret, options.redirectUri, options.scope);
             resolve(instance);
         } catch (ex) {
             console.log("Error in AuthHelperLinkedIn.init: " + ex);

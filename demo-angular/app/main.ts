@@ -38,7 +38,8 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 var linkedInInitOptions: tnsOAuthModule.ITnsOAuthOptionsLinkedIn = {
     clientId: '<your_client_id>',				    // Add your client id
     clientSecret: '<your_client_secret>',			// Add your client secret
-    scope: ['r_basicprofile']	// Do not include if you want the default scopes
+    scope: ['r_basicprofile'],	// Do not include if you want the default scopes
+    redirectUri: '<your_redirect_uri>' // Configure your redirect URL here it must be and https or it will prevent iOS from working.
 };
 
 tnsOAuthModule.initLinkedIn(linkedInInitOptions);

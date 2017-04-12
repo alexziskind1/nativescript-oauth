@@ -58,4 +58,5 @@ export interface ITnsOAuthOptionsUaa extends ITnsOAuthOptions {
 
 export interface ITnsOAuthOptionsLinkedIn extends ITnsOAuthOptions {
     clientSecret: string;
+    redirectUri: string;
 }

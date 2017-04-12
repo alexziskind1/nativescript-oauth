@@ -9,7 +9,7 @@ import * as TnsOAuth from './tns-oauth-interfaces';
 */
 export class AuthHelperLinkedIn extends AuthHelper implements TnsOAuth.ITnsAuthHelper {
   //Constructs the the object with specified id, secret and scope
-  constructor(clientId: string, clientSecret: string, scope: Array<string>) {
+  constructor(clientId: string, clientSecret: string, redirectUri: string, scope: Array<string>) {
     super();
     var scopeStr = scope.join('%20');
     this.credentials = {
@@ -19,7 +19,7 @@ export class AuthHelperLinkedIn extends AuthHelper implements TnsOAuth.ITnsAuthH
       tokenEndpoint: '/oauth/v2/accessToken',
       clientId: clientId,
       clientSecret: clientSecret,
-      redirectUri: 'http://connect.myoauthapp.com/success',
+      redirectUri: redirectUri,
       scope: scopeStr
     };
   }
