@@ -31,11 +31,25 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
         }
     }
 
-    public shouldOverrideUrlLoading(view: android.webkit.WebView, url: string) {
+    /// param url was a string before 7.1.1. It is an object after 7.1.1
+    public shouldOverrideUrlLoading(view: android.webkit.WebView, url: any) {
         if (trace.enabled) {
             trace.write("WebViewClientClass.shouldOverrideUrlLoading(" + url + ")", trace.categories.Debug);
         }
-        if (this._checkCodeIntercept(this._view, null, url)) {
+        var urlStr = '';
+        if (typeof url === 'string') {
+            urlStr = url;
+        } else if (typeof url === 'object') {
+            try {
+                urlStr = url.getUrl().toString();
+            }
+            catch (ex) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        if (this._checkCodeIntercept(this._view, null, urlStr)) {
             return true;
         }
         return false;

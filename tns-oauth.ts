@@ -19,8 +19,8 @@ export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
 function getAuthHeaderFromCredentials(credentials: TnsOAuthModule.ITnsOAuthCredentials) {
     let customAuthHeader: any;
     if (credentials['basicAuthHeader']) {
-        customAuthHeader = {'Authorization': credentials['basicAuthHeader']};
-    } 
+        customAuthHeader = { 'Authorization': credentials['basicAuthHeader'] };
+    }
 
     return customAuthHeader;
 }
@@ -30,9 +30,9 @@ function getAuthHeaderFromCredentials(credentials: TnsOAuthModule.ITnsOAuthCrede
  * Gets a token for a given resource.
  */
 function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
-    
+
     let customAuthHeader: any = getAuthHeaderFromCredentials(credentials);
-    
+
     let oauth2 = new TnsOAuth(
         credentials.clientId,
         credentials.clientSecret,
@@ -58,9 +58,9 @@ function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code
  * Gets a new access token via a previously issued refresh token.
  */
 export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials, refreshToken: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
-    
+
     let customAuthHeader: any = getAuthHeaderFromCredentials(credentials);
-    
+
     var oauth2 = new TnsOAuth(
         credentials.clientId,
         credentials.clientSecret,
