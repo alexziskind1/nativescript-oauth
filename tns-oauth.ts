@@ -107,18 +107,24 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
 
         let checkCodeIntercept = (webView, error, url): boolean => {
             var retStr = '';
-
-            if (error && error.userInfo && error.userInfo.allValues && error.userInfo.allValues.count > 0) {
-                let val0 = error.userInfo.allValues[0];
-                if (val0.absoluteString) {
-                    retStr = error.userInfo.allValues[0].absoluteString;
-                } else {
-                    retStr = val0;
+            try {
+                if (error && error.userInfo && error.userInfo.allValues && error.userInfo.allValues.count > 0) {
+                    let val0 = error.userInfo.allValues[0];
+                    if (val0.absoluteString) {
+                        retStr = error.userInfo.allValues[0].absoluteString;
+                    } else if (val0.userInfo && val0.userInfo.allValues && val0.userInfo.allValues.count > 0) {
+                        retStr = val0.userInfo.allValues[0];
+                    } else {
+                        retStr = val0;
+                    }
+                } else if (webView.request && webView.request.URL && webView.request.URL.absoluteString) {
+                    retStr = webView.request.URL.absoluteString;
+                } else if (url) {
+                    retStr = url;
                 }
-            } else if (webView.request && webView.request.URL && webView.request.URL.absoluteString) {
-                retStr = webView.request.URL.absoluteString;
-            } else if (url) {
-                retStr = url;
+            }
+            catch (ex) {
+                reject('Failed to resolve return URL');
             }
 
             if (retStr != '') {
