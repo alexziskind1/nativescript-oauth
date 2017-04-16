@@ -55,3 +55,8 @@ export interface ITnsOAuthOptionsUaa extends ITnsOAuthOptions {
     cookieDomains: string[];
     basicAuthHeader: string;
 }
+
+export interface ITnsOAuthOptionsLinkedIn extends ITnsOAuthOptions {
+    clientSecret: string;
+    redirectUri: string;
+}

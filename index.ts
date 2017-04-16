@@ -8,6 +8,8 @@ import { AuthHelperOffice365 } from './auth-helper-office365';
 import { AuthHelperFacebook } from './auth-helper-facebook';
 import { AuthHelperGoogle } from './auth-helper-google';
 import { AuthHelperUaa } from './auth-helper-uaa';
+import { AuthHelperLinkedIn } from './auth-helper-linkedin';
+
 import * as TnsOAuth from './tns-oauth-interfaces';
 
 export var instance: TnsOAuth.ITnsAuthHelper = null;
@@ -80,6 +82,25 @@ export function initUaa(options: TnsOAuth.ITnsOAuthOptionsUaa): Promise<any> {
         }
     });
 }
+
+
+export function initLinkedIn(options: TnsOAuth.ITnsOAuthOptionsLinkedIn): Promise<any> {
+    return new Promise(function (resolve, reject) {
+        try {
+            if (instance !== null) {
+                reject("You already ran init");
+                return;
+            }
+
+            instance = new AuthHelperLinkedIn(options.clientId, options.clientSecret, options.redirectUri, options.scope);
+            resolve(instance);
+        } catch (ex) {
+            console.log("Error in AuthHelperLinkedIn.init: " + ex);
+            reject(ex);
+        }
+    });
+}
+
 
 export function accessToken(): string {
     return instance.tokenResult.accessToken;
