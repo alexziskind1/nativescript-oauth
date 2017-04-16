@@ -7,14 +7,11 @@ import * as dialogs from 'ui/dialogs';
     templateUrl: "app.component.html",
 })
 export class AppComponent {
-        
+
     public onTapLogin() {
         tnsOAuthModule.ensureValidToken()
             .then((token: string) => {
-                dialogs.alert('Got a token:' + token).then(()=> {
-                    console.log('Dialog closed!');
-                });
-
+                console.log('Token: ' + token);
             })
             .catch((er) => {
                 console.error('error logging in');
@@ -29,11 +26,6 @@ export class AppComponent {
                 console.error('error logging out');
                 console.dir(er);
             });
-    }
-
-    public onTapCallApi() {
-
-        
     }
 
     public authcallback() {
