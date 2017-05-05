@@ -15,6 +15,7 @@
     },
     "files": [
         "auth-helper.ts",
+        "auth-helper-azure.ts",
         "auth-helper-facebook.ts",
         "auth-helper-google.ts",
         "auth-helper-office365.ts",
