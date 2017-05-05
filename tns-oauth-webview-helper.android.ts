@@ -33,7 +33,7 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
 
     /// param url was a string before 7.1.1. It is an object after 7.1.1
     public shouldOverrideUrlLoading(view: android.webkit.WebView, url: any) {
-        if (trace.enabled) {
+        if (trace.isEnabled()) {
             trace.write("WebViewClientClass.shouldOverrideUrlLoading(" + url + ")", trace.categories.Debug);
         }
         var urlStr = '';
@@ -61,10 +61,10 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
         super.onPageStarted(view, url, favicon);
 
         if (this._view) {
-            if (trace.enabled) {
+            if (trace.isEnabled()) {
                 trace.write("WebViewClientClass.onPageStarted(" + url + ", " + favicon + ")", trace.categories.Debug);
             }
-            this._view._onLoadStarted(url, WebView.navigationTypes[WebView.navigationTypes.indexOf("linkClicked")]);
+            this._view._onLoadStarted(url, (<any>WebView).navigationTypes[(<any>WebView).navigationTypes.indexOf("linkClicked")]);
         }
 
     }
@@ -73,7 +73,7 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
         super.onPageFinished(view, url);
 
         if (this._view) {
-            if (trace.enabled) {
+            if (trace.isEnabled()) {
                 trace.write("WebViewClientClass.onPageFinished(" + url + ")", trace.categories.Debug);
             }
 
@@ -94,7 +94,7 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
             super.onReceivedError(view, errorCode, description, failingUrl);
 
             if (this._view) {
-                if (trace.enabled) {
+                if (trace.isEnabled()) {
                     trace.write("WebViewClientClass.onReceivedError(" + errorCode + ", " + description + ", " + failingUrl + ")", trace.categories.Debug);
                 }
                 this._view._onLoadFinished(failingUrl, description + "(" + errorCode + ")");
@@ -108,7 +108,7 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
             super.onReceivedError(view, request, error);
 
             if (this._view) {
-                if (trace.enabled) {
+                if (trace.isEnabled()) {
                     trace.write("WebViewClientClass.onReceivedError(" + error.getErrorCode() + ", " + error.getDescription() + ", " + (error.getUrl && error.getUrl()) + ")", trace.categories.Debug);
                 }
                 this._view._onLoadFinished(error.getUrl && error.getUrl(), error.getDescription() + "(" + error.getErrorCode() + ")");
