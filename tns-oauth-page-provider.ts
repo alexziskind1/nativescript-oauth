@@ -31,7 +31,7 @@ export class TnsOAuthPageProvider {
         let page = new Page();
         page.content = stack;
 
-        wv.url = this._authUrl;
+        wv.src = this._authUrl;
 
         return page;
     };
