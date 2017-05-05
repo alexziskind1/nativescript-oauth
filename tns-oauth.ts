@@ -337,9 +337,14 @@ class TnsOAuth {
                         // being thrown
                         results = querystring.parse(response.content.toString());
                     }
+
                     let access_token = results["access_token"];
                     let refresh_token = results["refresh_token"];
                     let expires_in = results["expires_in"];
+
+                    // Some Azure apps need the id_token instead of the access_token.
+                    let id_token = results["id_token"] || '';
+
                     delete results["refresh_token"];
 
                     let expSecs = Math.floor(parseFloat(expires_in));
@@ -350,7 +355,8 @@ class TnsOAuth {
                         accessToken: access_token,
                         refreshToken: refresh_token,
                         accessTokenExpiration: expDate,
-                        refreshTokenExpiration: expDate
+                        refreshTokenExpiration: expDate,
+                        idToken: id_token
                     };
 
                     resolve(tokenResult);
