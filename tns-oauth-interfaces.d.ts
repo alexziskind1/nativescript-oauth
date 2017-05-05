@@ -31,6 +31,7 @@ export interface ITnsOAuthTokenResult {
     refreshToken: string;
     accessTokenExpiration: Date;
     refreshTokenExpiration: Date;
+    idToken: string;
 }
 
 export interface ITnsOAuthOptions {
@@ -39,6 +40,10 @@ export interface ITnsOAuthOptions {
 }
 
 export interface ITnsOAuthOptionsOffice365 extends ITnsOAuthOptions {
+}
+
+export interface ITnsOAuthOptionsAzure extends ITnsOAuthOptions {
+    tenant: string;
 }
 
 export interface ITnsOAuthOptionsFacebook extends ITnsOAuthOptions {
