@@ -15,7 +15,16 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
     }
 
     public static initWithWebViewAndIntercept(wv: WebView, checkCodeIntercept) {
-        (<any>wv)._webViewClient = TnsOAuthWebViewHelper.initWithView(wv, checkCodeIntercept);
+        let wvCreateNv = wv.createNativeView;
+        wv.createNativeView = () => {
+            (<any>wv)._webViewClient = TnsOAuthWebViewHelper.initWithView(wv, checkCodeIntercept);
+            let nativeView = new android.webkit.WebView(wv._context);
+            nativeView.getSettings().setJavaScriptEnabled(true);
+            nativeView.getSettings().setBuiltInZoomControls(true);
+            nativeView.setWebViewClient((<any>wv)._webViewClient);
+            (<any>nativeView).client = (<any>wv)._webViewClient;
+            return nativeView;
+        };
     }
 
     private static initWithView(view: WebView, checkCodeIntercept): TnsOAuthWebViewHelper {
@@ -64,7 +73,7 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
             if (trace.isEnabled()) {
                 trace.write("WebViewClientClass.onPageStarted(" + url + ", " + favicon + ")", trace.categories.Debug);
             }
-            this._view._onLoadStarted(url, (<any>WebView).navigationTypes[(<any>WebView).navigationTypes.indexOf("linkClicked")]);
+            this._view._onLoadStarted(url, undefined);
         }
 
     }
