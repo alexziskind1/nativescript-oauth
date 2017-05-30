@@ -8,17 +8,17 @@ const TNS_OAUTH_KEY = "TNS_OAUTH_KEY";
 
 export class TnsOAuthTokenCache {
 
-    public static hasToken() : boolean {
+    public static hasToken(): boolean {
         return applicationSettingsModule.hasKey(TNS_OAUTH_KEY);
     }
 
-    public static getToken() : TnsOAuth.ITnsOAuthTokenResult {
+    public static getToken(): TnsOAuth.ITnsOAuthTokenResult {
         if (applicationSettingsModule.hasKey(TNS_OAUTH_KEY)) {
             let trStr = applicationSettingsModule.getString(TNS_OAUTH_KEY);
             let tr = <TnsOAuth.ITnsOAuthTokenResult>JSON.parse(trStr);
 
             if (tr.accessTokenExpiration) {
-                tr.accessTokenExpiration = new Date(t.accessTokenExpiration.toString());
+                tr.accessTokenExpiration = new Date(tr.accessTokenExpiration.toString());
             }
 
             if (tr.refreshTokenExpiration) {
