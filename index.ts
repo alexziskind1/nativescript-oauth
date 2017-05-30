@@ -9,8 +9,10 @@ import { AuthHelperFacebook } from './auth-helper-facebook';
 import { AuthHelperGoogle } from './auth-helper-google';
 import { AuthHelperUaa } from './auth-helper-uaa';
 import { AuthHelperLinkedIn } from './auth-helper-linkedin';
+import { AuthHelperAzure } from "./auth-helper-azure";
 
 import * as TnsOAuth from './tns-oauth-interfaces';
+
 
 export var instance: TnsOAuth.ITnsAuthHelper = null;
 
@@ -26,6 +28,23 @@ export function initOffice365(options: TnsOAuth.ITnsOAuthOptionsOffice365): Prom
             resolve(instance);
         } catch (ex) {
             console.log("Error in AuthHelperOffice365.init: " + ex);
+            reject(ex);
+        }
+    });
+}
+
+export function initAzure(options: TnsOAuth.ITnsOAuthOptionsAzure): Promise<any> {
+    return new Promise(function (resolve, reject) {
+        try {
+            if (instance !== null) {
+                reject("You already ran init");
+                return;
+            }
+
+            instance = new AuthHelperAzure(options.clientId, options.scope, options.tenant);
+            resolve(instance);
+        } catch (ex) {
+            console.log("Error in AuthHelperAzure.init: " + ex);
             reject(ex);
         }
     });
@@ -104,6 +123,10 @@ export function initLinkedIn(options: TnsOAuth.ITnsOAuthOptionsLinkedIn): Promis
 
 export function accessToken(): string {
     return instance.tokenResult.accessToken;
+}
+
+export function idToken(): string {
+    return instance.tokenResult.idToken;
 }
 
 export function login(successPage?: string): Promise<string> {

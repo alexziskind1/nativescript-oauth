@@ -13,6 +13,7 @@ export class HelloWorldModel extends Observable {
         tnsOAuthModule.ensureValidToken()
             .then((token: string) => {
                 console.log('token: ' + token);
+                console.log('id token: ' + tnsOAuthModule.idToken());
             })
             .catch((er) => {
                 console.error('error logging in');

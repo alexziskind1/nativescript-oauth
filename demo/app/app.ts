@@ -10,6 +10,12 @@ import trace = require("trace");
 import * as tnsOAuthModule from 'nativescript-oauth';
 
 
+var azureInitOptions: tnsOAuthModule.ITnsOAuthOptionsAzure = {
+    clientId: '12345', //client id for application (GUID)
+    scope: ['openid'],
+    tenant: 'SOME_TEST_TENANT'
+};
+
 var o365InitOptions: tnsOAuthModule.ITnsOAuthOptionsOffice365 = {
     clientId: '31e1c318-a133-432f-a53b-5122ceab4c12', //client id for application (GUID)
     scope: ['Files.ReadWrite', 'User.ReadWrite', 'offline_access']
@@ -21,6 +27,7 @@ var facebookInitOptions: tnsOAuthModule.ITnsOAuthOptionsFacebook = {
     scope: ['email']
 };
 
+//tnsOAuthModule.initAzure(azureInitOptions);
 //tnsOAuthModule.initOffice365(o365InitOptions);
 tnsOAuthModule.initFacebook(facebookInitOptions);
 
