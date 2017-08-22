@@ -8,6 +8,7 @@
         "noLib": false,
         "preserveConstEnums": true,
         "declaration": false,
+        "noEmitHelpers": true,
         "suppressImplicitAnyIndexErrors": true,
         "lib": [
             "es6",
