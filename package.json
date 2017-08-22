@@ -68,6 +68,7 @@
   "devDependencies": {
     "nativescript-dev-typescript": "^0.4.0",
     "tns-core-modules": "~3.0.0",
-    "typescript": "~2.2.2"
+    "typescript": "~2.2.2",
+    "tns-platform-declarations": "~3.0.1"
   }
 }
