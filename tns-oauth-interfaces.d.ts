@@ -16,6 +16,7 @@ export interface ITnsOAuthCredentials {
     tokenEndpointBase?: string;
     authorizeEndpoint: string;
     tokenEndpoint: string;
+    revokeEndpoint?: string;
     clientId: string;
     clientSecret?: string;
     redirectUri: string;
@@ -64,9 +65,6 @@ export interface ITnsOAuthOptionsLinkedIn extends ITnsOAuthOptions {
 
 export interface ITnsOAuthOptionsSalesforce extends ITnsOAuthOptions {
     authority: string;
-    //authorizeEndpoint: string;
-    //tokenEndpoint: string;
-    //clientSecret: string;
     redirectUri: string;
     responseType: string;
 }
