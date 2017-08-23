@@ -13,8 +13,7 @@
     }
   },
   "scripts": {
-    "build": "tsc",
-    "demo.ios": "npm run preparedemo && cd demo-angular && tns emulate ios",
+    "build": "npm i && tsc",
     "demo.android": "npm run preparedemo && cd demo-angular && tns run android",
     "preparedemo": "npm run build && cd demo-angular && tns plugin remove nativescript-oauth && tns plugin add .. && tns install",
     "setup": "cd demo-angular && npm install && cd .. && npm run build && cd demo-angular && tns plugin add .. && cd .."
@@ -68,7 +67,8 @@
   },
   "devDependencies": {
     "nativescript-dev-typescript": "^0.4.0",
-    "tns-core-modules": "3.0.0",
-    "typescript": "^2.2.1"
+    "tns-core-modules": "~3.0.0",
+    "typescript": "~2.2.2",
+    "tns-platform-declarations": "~3.0.1"
   }
 }
