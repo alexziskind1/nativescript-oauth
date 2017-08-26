@@ -9,6 +9,7 @@ import { AuthHelperFacebook } from './auth-helper-facebook';
 import { AuthHelperGoogle } from './auth-helper-google';
 import { AuthHelperUaa } from './auth-helper-uaa';
 import { AuthHelperLinkedIn } from './auth-helper-linkedin';
+import { AuthHelperSalesforce } from './auth-helper-salesforce';
 
 import * as TnsOAuth from './tns-oauth-interfaces';
 
@@ -100,6 +101,31 @@ export function initLinkedIn(options: TnsOAuth.ITnsOAuthOptionsLinkedIn): Promis
         }
     });
 }
+
+export function initSalesforce(options: TnsOAuth.ITnsOAuthOptionsSalesforce): Promise<any> {
+    return new Promise(function (resolve, reject) {
+        try {
+            if (instance !== null) {
+                reject("You already ran init");
+                return;
+            }
+
+            instance = new AuthHelperSalesforce(
+                options.authority,
+                options.clientId,
+                options.redirectUri,
+                options.responseType,
+                options.scope
+            );
+            resolve(instance);
+        } catch (ex) {
+            console.log("Error in AuthHelperSalesforce.init: " + ex);
+            reject(ex);
+        }
+    });
+}
+
+
 
 
 export function accessToken(): string {
