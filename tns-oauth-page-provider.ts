@@ -11,15 +11,18 @@ import { TnsOAuthWebViewHelper } from './tns-oauth-webview-helper';
 export class TnsOAuthPageProvider {
     private _checkCodeIntercept: (WebView, error?, url?) => boolean;
     private _authUrl: string;
+    private _webviewSettingsIntercept: (WebView) => void;
 
-    constructor(checkCodeIntercept, authUrl) {
+    constructor(checkCodeIntercept, authUrl, webviewSettingsIntercept) {
         this._checkCodeIntercept = checkCodeIntercept;
         this._authUrl = authUrl;
+        this._webviewSettingsIntercept = webviewSettingsIntercept;
     }
 
     public loginPageFunc() {
         let wv = new WebView();
 
+        this._webviewSettingsIntercept(wv);
         TnsOAuthWebViewHelper.initWithWebViewAndIntercept(wv, this._checkCodeIntercept);
 
         let grid = new GridLayout();
@@ -32,6 +35,7 @@ export class TnsOAuthPageProvider {
         page.content = stack;
 
         wv.src = this._authUrl;
+        this._webviewSettingsIntercept(wv);
 
         return page;
     };

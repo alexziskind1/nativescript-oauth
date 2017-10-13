@@ -101,7 +101,9 @@ export function getTokenFromCache() {
     return TnsOAuthTokenCache.getToken();
 }
 
-export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, successPage?: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials,
+                                              webviewSettingsIntercept?: (WebView) => void,
+                                              successPage?: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;
 
@@ -173,7 +175,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
         };
 
         console.log('LOGIN PAGE URL = ' + getAuthUrl(credentials));
-        let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials));
+        let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials), webviewSettingsIntercept);
         frameModule.topmost().navigate(() => { return authPage.loginPageFunc() });
     });
 }

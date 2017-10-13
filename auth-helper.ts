@@ -4,6 +4,7 @@ import * as tnsOauth from './tns-oauth';
 import * as TnsOAuth from './tns-oauth-interfaces';
 
 export class AuthHelper {
+    protected _webviewSettingsIntercept: (WebView) => void;
     public credentials: TnsOAuth.ITnsOAuthCredentials;
     public tokenResult: TnsOAuth.ITnsOAuthTokenResult;
 
@@ -13,7 +14,7 @@ export class AuthHelper {
 
     public login(successPage?: string): Promise<string> {
         return new Promise((resolve, reject) => {
-            tnsOauth.loginViaAuthorizationCodeFlow(this.credentials, successPage)
+            tnsOauth.loginViaAuthorizationCodeFlow(this.credentials, this._webviewSettingsIntercept, successPage)
                 .then((response: TnsOAuth.ITnsOAuthTokenResult) => {
                     this.tokenResult = response;
                     resolve(response.accessToken);

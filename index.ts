@@ -115,7 +115,8 @@ export function initSalesforce(options: TnsOAuth.ITnsOAuthOptionsSalesforce): Pr
                 options.clientId,
                 options.redirectUri,
                 options.responseType,
-                options.scope
+                options.scope,
+                options.webviewSettingsIntercept
             );
             resolve(instance);
         } catch (ex) {
