@@ -24,7 +24,7 @@ export class AuthHelperSalesforce extends AuthHelper implements TnsOAuth.ITnsAut
     var scopeStr = scope.join('%20');
     this.credentials = {
         authority: authority,
-        authorizeEndpoint: '/exedeuseragent',
+        authorizeEndpoint: '/services/oauth2/authorize',
         tokenEndpoint: '/services/oauth2/token',
         revokeEndpoint: '/services/oauth2/revoke',
         clientId: clientId,
