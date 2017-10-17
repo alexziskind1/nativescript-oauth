@@ -108,6 +108,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
         var navCount = 0;
 
         let checkCodeIntercept = (webView, error, url): boolean => {
+            webviewSettingsIntercept(webView);
             var retStr = '';
             try {
                 if (error && error.userInfo && error.userInfo.allValues && error.userInfo.allValues.count > 0) {
@@ -175,7 +176,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
         };
 
         console.log('LOGIN PAGE URL = ' + getAuthUrl(credentials));
-        let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials), webviewSettingsIntercept);
+        let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials));
         frameModule.topmost().navigate(() => { return authPage.loginPageFunc() });
     });
 }
