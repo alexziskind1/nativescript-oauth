@@ -25,6 +25,20 @@ function getAuthHeaderFromCredentials(credentials: TnsOAuthModule.ITnsOAuthCrede
     return customAuthHeader;
 }
 
+function isIgnoredParameter(paramName: string, ignoredParameters: string[]): boolean {
+    return ignoredParameters.indexOf(paramName) > -1;
+}
+
+function setMemberIfNotIgnored(params: any, paramName: string, ignoredParams: string[], value: string): any {
+    if(!isIgnoredParameter(paramName, ignoredParams)) params[paramName] = value;
+    return params;
+}
+
+function addQueryStringIfNotIgnored(queryStr: string, paramName: string, ignoredParams: string[], value: string): string {
+    if(!isIgnoredParameter(paramName, ignoredParams)) queryStr += (queryStr.startsWith('?') ? '&' : '?') + (paramName + '=' + value);
+    return queryStr;
+}
+
 
 /**
  * Gets a token for a given resource.
@@ -43,13 +57,15 @@ function getTokenFromCode(credentials: TnsOAuthModule.ITnsOAuthCredentials, code
         customAuthHeader
     );
 
-    let oauthParams = {
-        grant_type: 'authorization_code',
-        redirect_uri: credentials.redirectUri,
-        response_mode: 'form_post',
-        nonce: utils.newUUID(),
-        state: 'abcd'
-    };
+    credentials.ignoredTokenParams = credentials.ignoredTokenParams || [];
+
+    let oauthParams = { };
+
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'grant_type', credentials.ignoredTokenParams, 'authorization_code');
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'redirect_uri', credentials.ignoredTokenParams, credentials.redirectUri);
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'response_mode', credentials.ignoredTokenParams, 'form_post');
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'nonce', credentials.ignoredTokenParams, utils.newUUID());
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'state', credentials.ignoredTokenParams, 'abcd');
 
     return oauth2.getOAuthAccessToken(code, oauthParams);
 }
@@ -71,13 +87,15 @@ export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCr
         customAuthHeader
     );
 
-    let oauthParams = {
-        grant_type: 'refresh_token',
-        redirect_uri: credentials.redirectUri,
-        response_mode: 'form_post',
-        nonce: utils.newUUID(),
-        state: 'abcd'
-    };
+    credentials.ignoredTokenParams = credentials.ignoredTokenParams || [];
+
+    let oauthParams = { };
+
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'grant_type', credentials.ignoredTokenParams, 'refresh_token');
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'redirect_uri', credentials.ignoredTokenParams, credentials.redirectUri);
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'response_mode', credentials.ignoredTokenParams, 'form_post');
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'nonce', credentials.ignoredTokenParams, utils.newUUID());
+    oauthParams = setMemberIfNotIgnored(oauthParams, 'state', credentials.ignoredTokenParams, 'abcd');
 
     return oauth2.getOAuthAccessToken(refreshToken, oauthParams);
 }
@@ -87,14 +105,19 @@ export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCr
  * @return {string} a fully formed uri with which authentication can be completed
  */
 export function getAuthUrl(credentials: TnsOAuthModule.ITnsOAuthCredentials): string {
-    return credentials.authority + credentials.authorizeEndpoint +
-        '?client_id=' + credentials.clientId +
-        '&response_type=code' +
-        '&redirect_uri=' + credentials.redirectUri +
-        '&scope=' + credentials.scope +
-        '&response_mode=query' +
-        '&nonce=' + utils.newUUID() +
-        '&state=abcd';
+    var queryStr = '';
+
+    credentials.ignoredAuthParams = credentials.ignoredAuthParams || [];
+
+    queryStr = addQueryStringIfNotIgnored(queryStr, 'client_id', credentials.ignoredAuthParams, credentials.clientId);
+    queryStr = addQueryStringIfNotIgnored(queryStr, 'response_type', credentials.ignoredAuthParams, 'code');
+    queryStr = addQueryStringIfNotIgnored(queryStr, 'redirect_uri', credentials.ignoredAuthParams, credentials.redirectUri);
+    queryStr = addQueryStringIfNotIgnored(queryStr, 'scope', credentials.ignoredAuthParams, credentials.scope);
+    queryStr = addQueryStringIfNotIgnored(queryStr, 'response_mode', credentials.ignoredAuthParams, 'query');
+    queryStr = addQueryStringIfNotIgnored(queryStr, 'nonce', credentials.ignoredAuthParams, utils.newUUID());
+    queryStr = addQueryStringIfNotIgnored(queryStr, 'state', credentials.ignoredAuthParams, 'abcd');
+
+    return credentials.authority + credentials.authorizeEndpoint + queryStr;
 }
 
 export function getTokenFromCache() {

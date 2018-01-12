@@ -24,6 +24,14 @@ var facebookInitOptions: tnsOAuthModule.ITnsOAuthOptionsFacebook = {
 
 tnsOAuthModule.initFacebook(facebookInitOptions);
 
+// var dropboxInitOptions: tnsOAuthModule.ITnsOAuthOptionsDropBox = {
+//     clientId: 'XXXXXXXXXX',
+//     clientSecret: 'XXXXXXXXXX',
+//     redirectUri: 'http://localhost',
+//     scope: [],
+// };
+
+// tnsOAuthModule.initDropBox(dropboxInitOptions);
 
 
 // let uaaInitOptions: tnsOAuthModule.ITnsOAuthOptionsUaa = {

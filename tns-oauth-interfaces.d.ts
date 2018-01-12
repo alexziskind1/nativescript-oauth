@@ -22,6 +22,8 @@ export interface ITnsOAuthCredentials {
     redirectUri: string;
     responseType?: string;
     scope: string;
+    ignoredTokenParams?: string[];
+    ignoredAuthParams?: string[];
 }
 
 export interface ITnsOAuthCredentialsUaa extends ITnsOAuthCredentials {
@@ -67,4 +69,9 @@ export interface ITnsOAuthOptionsSalesforce extends ITnsOAuthOptions {
     authority: string;
     redirectUri: string;
     responseType: string;
+}
+
+export interface ITnsOAuthOptionsDropBox extends ITnsOAuthOptions {
+    clientSecret: string;
+    redirectUri: string;
 }
