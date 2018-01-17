@@ -127,6 +127,7 @@ export function getTokenFromCache() {
 export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, successPage?: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;
+        var tokenNavStarted = false;
 
         let checkCodeIntercept = (webView, error, url): boolean => {
             var retStr = '';
@@ -158,6 +159,9 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                     let errSubCode = qsObj['error_subcode'];
                     if (codeStr) {
                         try {
+                            if(credentials.skipNextTokenNav && tokenNavStarted) return true;
+
+                            tokenNavStarted = true;
                             getTokenFromCode(credentials, codeStr)
                                 .then((response: TnsOAuthModule.ITnsOAuthTokenResult) => {
                                     TnsOAuthTokenCache.setToken(response);

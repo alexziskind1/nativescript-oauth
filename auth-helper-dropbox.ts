@@ -22,7 +22,8 @@ export class AuthHelperDropBox extends AuthHelper implements TnsOAuth.ITnsAuthHe
       redirectUri: redirectUri,
       scope: scopeStr,
       ignoredAuthParams: ['response_mode','nonce'],
-      ignoredTokenParams: ['response_mode','nonce','state']
+      ignoredTokenParams: ['response_mode','nonce','state'],
+      skipNextTokenNav: true
     };
   }
   //Gets cookie domains for logging out

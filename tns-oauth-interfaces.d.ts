@@ -24,6 +24,7 @@ export interface ITnsOAuthCredentials {
     scope: string;
     ignoredTokenParams?: string[];
     ignoredAuthParams?: string[];
+    skipNextTokenNav?: boolean;
 }
 
 export interface ITnsOAuthCredentialsUaa extends ITnsOAuthCredentials {
