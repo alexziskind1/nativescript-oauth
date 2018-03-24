@@ -3,15 +3,7 @@
   "version": "2.0.1",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
-  "nativescript": {
-    "platforms": {
-      "ios": "3.0.0",
-      "android": "3.0.0"
-    },
-    "tns-ios": {
-      "version": "3.0.0"
-    }
-  },
+  "nativescript": {},
   "scripts": {
     "build": "npm i && tsc",
     "demo.android": "npm run preparedemo && cd demo-angular && tns run android",
@@ -66,9 +58,9 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "nativescript-dev-typescript": "^0.4.0",
-    "tns-core-modules": "~3.0.0",
-    "typescript": "~2.2.2",
-    "tns-platform-declarations": "~3.0.1"
+    "nativescript-dev-typescript": "^0.5.0",
+    "tns-core-modules": "3.4.1",
+    "typescript": "2.3.4",
+    "tns-platform-declarations": "3.4.1"
   }
 }

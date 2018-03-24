@@ -14,14 +14,11 @@ var o365InitOptions: tnsOAuthModule.ITnsOAuthOptionsOffice365 = {
 //tnsOAuthModule.initOffice365(o365InitOptions);
 
 
-
 var facebookInitOptions: tnsOAuthModule.ITnsOAuthOptionsFacebook = {
-    clientId: '691208554411111',
-    clientSecret: 'd8725ac416fa1bb1917ccffd1611111',
+    clientId: '691208554415645',
+    clientSecret: 'd8725ac416fa1bb1917ccffd1670e3c6',
     scope: ['email']
 };
-
-
 tnsOAuthModule.initFacebook(facebookInitOptions);
 
 

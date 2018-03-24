@@ -117,8 +117,9 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                     } else {
                         retStr = val0;
                     }
-                } else if (webView.request && webView.request.URL && webView.request.URL.absoluteString) {
-                    retStr = webView.request.URL.absoluteString;
+                    //} else if (webView.request && webView.request.URL && webView.request.URL.absoluteString) {
+                } else if (webView && webView.URL && webView.URL.absoluteString) {
+                    retStr = webView.URL.absoluteString;
                 } else if (url) {
                     retStr = url;
                 }
