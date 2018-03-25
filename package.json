@@ -1,6 +1,6 @@
 {
   "name": "nativescript-oauth",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "OAuth 2 login for NativeScript.",
   "main": "index.js",
   "nativescript": {},
