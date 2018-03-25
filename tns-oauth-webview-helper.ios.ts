@@ -45,6 +45,8 @@ export class TnsOAuthWebViewHelper extends NSObject implements WKNavigationDeleg
 
 
     public webViewDecidePolicyForNavigationActionDecisionHandler(webView, navigationAction, decisionHandler) {
+        //decisionHandler(WKNavigationActionPolicy.Allow);
+        this._checkCodeIntercept(webView, null);
         this._origDelegate.webViewDecidePolicyForNavigationActionDecisionHandler(webView, navigationAction, decisionHandler);
     }
 
