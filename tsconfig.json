@@ -29,6 +29,7 @@
         "auth-helper-office365.ts",
         "auth-helper-uaa.ts",
         "auth-helper-linkedin.ts",
+        "auth-helper-dropbox.ts",
         "index.ts",
         "tns-oauth.ts",
         "tns-oauth-page-provider.ts",
