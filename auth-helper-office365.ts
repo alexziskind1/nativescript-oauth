@@ -6,11 +6,11 @@ import * as TnsOAuth from './tns-oauth-interfaces';
 
 export class AuthHelperOffice365 extends AuthHelper implements TnsOAuth.ITnsAuthHelper {
 
-  constructor(clientId: string, scope: Array<string>) {
+  constructor(tenantId:string ='common', clientId: string, scope: Array<string>) {
     super();
     var scopeStr = scope.join('%20');
     this.credentials = {
-      authority: 'https://login.microsoftonline.com/common',
+      authority: `https://login.microsoftonline.com/${tenantId}`,
       authorizeEndpoint: '/oauth2/v2.0/authorize',
       tokenEndpoint: '/oauth2/v2.0/token',
       clientId: clientId,
