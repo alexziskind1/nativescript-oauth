@@ -4,6 +4,7 @@ import { Page } from 'ui/page';
 import { GridLayout } from 'ui/layouts/grid-layout';
 import { StackLayout } from 'ui/layouts/stack-layout';
 import { WebView } from 'ui/web-view';
+import { isAndroid } from 'tns-core-modules/platform';
 //import { TnsOAuthWebViewDelegateImpl } from './tns-oauth-webview';
 import { TnsOAuthWebViewHelper } from './tns-oauth-webview-helper';
 
@@ -30,6 +31,10 @@ export class TnsOAuthPageProvider {
 
         let page = new Page();
         page.content = stack;
+
+        if (isAndroid) {
+            page.actionBarHidden = true;
+        }
 
         wv.src = this._authUrl;
 
