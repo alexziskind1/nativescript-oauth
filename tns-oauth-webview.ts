@@ -11,6 +11,6 @@ export class TnsOauthWebView extends WebView {
 
   public onUnloaded() {
     super.onUnloaded();
-    this._cancelEventHandler();
+    this._cancelEventHandler("User cancelled.");
   }
 }
