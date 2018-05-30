@@ -34,6 +34,7 @@ export class TnsOAuthPageProvider {
 
         if (isAndroid) {
             page.actionBarHidden = true;
+            wv.android.getSettings().setBuiltInZoomControls(false);
         }
 
         wv.src = this._authUrl;
