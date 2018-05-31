@@ -12,8 +12,8 @@ export class AuthHelperCustom extends AuthHelper implements TnsOAuth.ITnsAuthHel
     ) {
         super();
         this.credentials = {
-        ...credentials,
-        scope: credentials.scope.replace(/ /g, '%20'),
+            ...credentials,
+            scope: credentials.scope.replace(/ /g, '%20'),
         };
     }
 
