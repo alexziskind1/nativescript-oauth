@@ -113,7 +113,7 @@ tnsOAuthModule.initFacebook(facebookInitOptions);
 ```js
 
 var uaaInitOptions: tnsOAuthModule.ITnsOAuthOptionsUaa = {
-    authority: 'https://my-uaa-instance.com',    
+    authority: 'https://my-uaa-instance.com',
     redirectUri: 'myAppDomain://authcallback',
     clientId: 'my-client-id',
     clientSecret: 'my-client-secret',
@@ -137,6 +137,28 @@ var linkedInInitOptions : tnsOAuthModule.ITnsOAuthOptionsLinkedIn = {
 };
 
 tnsOAuthModule.initLinkedIn(linkedInInitOptions);
+```
+
+###### For Custom OAuth Login, include the following lines
+
+The custom provider is intended for advanced users. It directly exposes the OAuth credentials. You can use this to connect with your own private identity server or other providers.
+
+```js
+var myInitOptions : tnsOAuthModule.ITnsOAuthCredentials = {
+    authority: 'https://my.identity-server',
+    authorizeEndpoint: '/my/authorize/endpoint'
+    tokenEndpoint: '/my/token/endpoint',
+    clientId: 'myClientId',
+    clientSecret: 'my-client-secret,
+    redirectUri: 'myAppDomain://callback',
+    responseType: 'my tokens',
+    scope: 'my requested scopes',
+};
+
+tnsOAuthModule.initCustom({
+    credentials: myInitOptions,
+    cookieDomains: [ 'my.identity-server', ... ],
+});
 ```
 
 ### Logging in
