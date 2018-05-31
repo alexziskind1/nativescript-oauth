@@ -145,17 +145,20 @@ The custom provider is intended for advanced users. It directly exposes the OAut
 
 ```js
 var myInitOptions : tnsOAuthModule.ITnsOAuthCredentials = {
-    authority: `https://my.identity-server`,
-    authorizeEndpoint: "/my/authorize/endpoint"
-    tokenEndpoint: "/my/token/endpoint",
-    clientId: "myClientId",
-    clientSecret: "my-client-secret,
-    redirectUri: "myAppDomain://callback",
-    responseType: "my tokens",
-    scope: "my requested scopes",
+    authority: 'https://my.identity-server',
+    authorizeEndpoint: '/my/authorize/endpoint'
+    tokenEndpoint: '/my/token/endpoint',
+    clientId: 'myClientId',
+    clientSecret: 'my-client-secret,
+    redirectUri: 'myAppDomain://callback',
+    responseType: 'my tokens',
+    scope: 'my requested scopes',
 };
 
-tnsOAuthModule.initCustom(myInitOptions);
+tnsOAuthModule.initCustom({
+    credentials: myInitOptions,
+    cookieDomains: [ 'my.identity-server', ... ],
+  });
 ```
 
 ### Logging in
