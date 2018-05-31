@@ -158,7 +158,7 @@ var myInitOptions : tnsOAuthModule.ITnsOAuthCredentials = {
 tnsOAuthModule.initCustom({
     credentials: myInitOptions,
     cookieDomains: [ 'my.identity-server', ... ],
-  });
+});
 ```
 
 ### Logging in
