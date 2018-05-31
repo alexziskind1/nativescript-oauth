@@ -3,8 +3,8 @@
 import { Page } from 'ui/page';
 import { GridLayout } from 'ui/layouts/grid-layout';
 import { StackLayout } from 'ui/layouts/stack-layout';
-import { WebView } from 'ui/web-view';
 import { isAndroid } from 'tns-core-modules/platform';
+import { TnsOauthWebView } from './tns-oauth-webview';
 //import { TnsOAuthWebViewDelegateImpl } from './tns-oauth-webview';
 import { TnsOAuthWebViewHelper } from './tns-oauth-webview-helper';
 
@@ -19,7 +19,7 @@ export class TnsOAuthPageProvider {
     }
 
     public loginPageFunc() {
-        let wv = new WebView();
+        let wv = new TnsOauthWebView();
 
         TnsOAuthWebViewHelper.initWithWebViewAndIntercept(wv, this._checkCodeIntercept);
 
@@ -34,7 +34,6 @@ export class TnsOAuthPageProvider {
 
         if (isAndroid) {
             page.actionBarHidden = true;
-            wv.android.getSettings().setBuiltInZoomControls(false);
         }
 
         wv.src = this._authUrl;
