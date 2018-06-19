@@ -2,7 +2,9 @@
 
 import { WebView } from 'ui/web-view';
 import { android } from 'tns-core-modules/application';
-import { isAndroid } from 'tns-core-modules/platform'
+import { isAndroid } from 'tns-core-modules/platform';
+
+import { isAppSuspending } from "./tns-oauth-utils";
 
 // https://developer.android.com/reference/android/view/WindowManager.LayoutParams#soft_input_adjust_resize
 const SOFT_INPUT_ADJUST_RESIZE = 16;
@@ -26,9 +28,11 @@ export class TnsOauthWebView extends WebView {
 
     public onUnloaded() {
         super.onUnloaded();
-        this._cancelEventHandler("User cancelled.");
-        if (isAndroid) {
-            this.restoreAndroidSoftInputMode();
+        if (!isAppSuspending) {
+            this._cancelEventHandler("User cancelled.");
+            if (isAndroid) {
+                this.restoreAndroidSoftInputMode();
+            }
         }
     }
 
