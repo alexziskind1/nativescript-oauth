@@ -28,7 +28,7 @@ export class TnsOauthWebView extends WebView {
 
     public onUnloaded() {
         super.onUnloaded();
-        if (!isAppSuspending) {
+        if (!isAppSuspending()) {
             this._cancelEventHandler("User cancelled.");
             if (isAndroid) {
                 this.restoreAndroidSoftInputMode();
