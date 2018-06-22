@@ -11,10 +11,9 @@ export class AuthHelperCustom extends AuthHelper implements TnsOAuth.ITnsAuthHel
         private cookieDomains: Array<string>,
     ) {
         super();
-        this.credentials = {
-            ...credentials,
-            scope: credentials.scope.replace(/ /g, '%20'),
-        };
+        this.credentials = {} as any;
+        Object.assign(this.credentials, credentials);
+        this.credentials.scope = credentials.scope.replace(/ /g, '%20');
     }
 
     public logout(successPage?: string): Promise<void> {
