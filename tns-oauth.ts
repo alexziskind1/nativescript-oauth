@@ -101,13 +101,16 @@ export function getTokenFromCache() {
     return TnsOAuthTokenCache.getToken();
 }
 
-export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, successPage?: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials,
+                                              webviewSettingsIntercept?: (WebView) => void,
+                                              successPage?: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;
 
         let hasCode = false;
 
         let checkCodeIntercept = (webView, error, url): boolean => {
+            webviewSettingsIntercept(webView);
             var retStr = '';
             try {
                 if (error && error.userInfo && error.userInfo.allValues && error.userInfo.allValues.count > 0) {

@@ -18,7 +18,7 @@ export class AuthHelperSalesforce extends AuthHelper implements TnsOAuth.ITnsAut
       redirectUri: string,
       responseType: string,
       scope: Array<string>,
-      clientSecret?: string,
+      webviewSettingsIntercept?: (WebView) => void
   ) {
     super();
     var scopeStr = scope.join('%20');
@@ -28,11 +28,11 @@ export class AuthHelperSalesforce extends AuthHelper implements TnsOAuth.ITnsAut
         tokenEndpoint: '/services/oauth2/token',
         revokeEndpoint: '/services/oauth2/revoke',
         clientId: clientId,
-        clientSecret: clientSecret,
         redirectUri: redirectUri,
         responseType: responseType,
         scope: scopeStr
     };
+    this._webviewSettingsIntercept = webviewSettingsIntercept;
   }
   //Gets cookie domains for logging out
   public logout(): Promise<void> {

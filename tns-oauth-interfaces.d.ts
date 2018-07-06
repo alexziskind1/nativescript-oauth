@@ -67,6 +67,7 @@ export interface ITnsOAuthOptionsSalesforce extends ITnsOAuthOptions {
     authority: string;
     redirectUri: string;
     responseType: string;
+    webviewSettingsIntercept: (WebView) => void;
 }
 
 export interface ITnsOAuthOptionsCustom {
