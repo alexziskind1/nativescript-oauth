@@ -177,7 +177,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
         };
 
         console.log('LOGIN PAGE URL = ' + getAuthUrl(credentials));
-        let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials), reject);
+        let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials), reject, credentials.redirectUri);
         frameModule.topmost().navigate(() => { return authPage.loginPageFunc() });
     });
 }

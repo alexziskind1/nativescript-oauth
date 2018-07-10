@@ -19,10 +19,10 @@ export var instance: TnsOAuth.ITnsAuthHelper = null;
 export function initOffice365(options: TnsOAuth.ITnsOAuthOptionsOffice365): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
-            if (instance !== null) {
-                reject("You already ran init");
-                return;
-            }
+            // if (instance !== null) {
+            //     reject("You already ran init");
+            //     return;
+            // }
 
             instance = new AuthHelperOffice365(options.clientId, options.scope);
             resolve(instance);
@@ -36,10 +36,10 @@ export function initOffice365(options: TnsOAuth.ITnsOAuthOptionsOffice365): Prom
 export function initFacebook(options: TnsOAuth.ITnsOAuthOptionsFacebook): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
-            if (instance !== null) {
-                reject("You already ran init");
-                return;
-            }
+            // if (instance !== null) {
+            //     reject("You already ran init");
+            //     return;
+            // }
 
             instance = new AuthHelperFacebook(options.clientId, options.clientSecret, options.scope);
             resolve(instance);
@@ -53,10 +53,10 @@ export function initFacebook(options: TnsOAuth.ITnsOAuthOptionsFacebook): Promis
 export function initGoogle(options: TnsOAuth.ITnsOAuthOptionsGoogle): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
-            if (instance !== null) {
-                reject("You already ran init");
-                return;
-            }
+            // if (instance !== null) {
+            //     reject("You already ran init");
+            //     return;
+            // }
 
             instance = new AuthHelperGoogle(options.clientId, options.scope);
             resolve(instance);
@@ -71,10 +71,10 @@ export function initGoogle(options: TnsOAuth.ITnsOAuthOptionsGoogle): Promise<an
 export function initUaa(options: TnsOAuth.ITnsOAuthOptionsUaa): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
-            if (instance !== null) {
-                reject("You already ran init");
-                return;
-            }
+            // if (instance !== null) {
+            //     reject("You already ran init");
+            //     return;
+            // }
 
             instance = new AuthHelperUaa(options.authority, options.redirectUri, options.clientId, options.clientSecret, options.scope, options.cookieDomains, options.basicAuthHeader);
             resolve(instance);
@@ -89,10 +89,10 @@ export function initUaa(options: TnsOAuth.ITnsOAuthOptionsUaa): Promise<any> {
 export function initLinkedIn(options: TnsOAuth.ITnsOAuthOptionsLinkedIn): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
-            if (instance !== null) {
-                reject("You already ran init");
-                return;
-            }
+            // if (instance !== null) {
+            //     reject("You already ran init");
+            //     return;
+            // }
 
             instance = new AuthHelperLinkedIn(options.clientId, options.clientSecret, options.redirectUri, options.scope);
             resolve(instance);
@@ -106,10 +106,10 @@ export function initLinkedIn(options: TnsOAuth.ITnsOAuthOptionsLinkedIn): Promis
 export function initSalesforce(options: TnsOAuth.ITnsOAuthOptionsSalesforce): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
-            if (instance !== null) {
-                reject("You already ran init");
-                return;
-            }
+            // if (instance !== null) {
+            //     reject("You already ran init");
+            //     return;
+            // }
 
             instance = new AuthHelperSalesforce(
                 options.authority,
@@ -129,10 +129,10 @@ export function initSalesforce(options: TnsOAuth.ITnsOAuthOptionsSalesforce): Pr
 export function initCustom(options: TnsOAuth.ITnsOAuthOptionsCustom): Promise<any> {
     return new Promise(function (resolve, reject) {
         try {
-            if (instance !== null) {
-                reject("You already ran init");
-                return;
-            }
+            // if (instance !== null) {
+            //     reject("You already ran init");
+            //     return;
+            // }
 
             instance = new AuthHelperCustom(options.credentials, options.cookieDomains);
             resolve(instance);

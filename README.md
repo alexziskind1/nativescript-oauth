@@ -2,6 +2,16 @@
 
 ![npm-downloads-per-week](https://img.shields.io/npm/dw/nativescript-oauth.svg)
 
+This is a modification in the original library that we use to allow multiple login options to the end-user.
+
+The original library only allowed initially with one of Facebook, LinkedIn etc.
+
+Instead of calling init[Provider] at main.ts or app.ts, call it when the end user clicks on the "Login with [Provider]" button and on resolving the promise there, call the login method.
+
+Wrap the logout method with a if (5===5) { tnsOAuthModule.logout()...} so that at run-time, it does not throw an exception.
+
+I've also modified the library so that clicking cancel on the LinkedIn Auth page goes back to the previous webview instead of it attempting to load the linkedIn redirect URL.
+
 Library for interacting with OAuth 2.0 in NativeScript applications that provides simplified client access with a OAuth providers that support the OAuth 2.0 protocol such as Microsoft Live accounts, Microsoft Graph, Office 365, Facebook, Cloud Foundry UAA instances, LinkedIn, and Google (Google is a work in progress due to some of their restrictions).
 
 **_NEW:_** **Now supports NativeScript 4.1.0!**
