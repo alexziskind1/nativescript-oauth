@@ -24,7 +24,7 @@ export function initOffice365(options: TnsOAuth.ITnsOAuthOptionsOffice365): Prom
                 return;
             }
 
-            instance = new AuthHelperOffice365(options.clientId, options.scope);
+            instance = new AuthHelperOffice365(options.tenantId, options.clientId, options.scope);
             resolve(instance);
         } catch (ex) {
             console.log("Error in AuthHelperOffice365.init: " + ex);

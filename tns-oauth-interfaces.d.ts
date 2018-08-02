@@ -41,6 +41,7 @@ export interface ITnsOAuthOptions {
 }
 
 export interface ITnsOAuthOptionsOffice365 extends ITnsOAuthOptions {
+    tenantId: string;
 }
 
 export interface ITnsOAuthOptionsFacebook extends ITnsOAuthOptions {
