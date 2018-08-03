@@ -16,9 +16,11 @@ export interface ITnsOAuthCredentials {
     tokenEndpointBase?: string;
     authorizeEndpoint: string;
     tokenEndpoint: string;
+    revokeEndpoint?: string;
     clientId: string;
     clientSecret?: string;
     redirectUri: string;
+    responseType?: string;
     scope: string;
 }
 
@@ -59,4 +61,15 @@ export interface ITnsOAuthOptionsUaa extends ITnsOAuthOptions {
 export interface ITnsOAuthOptionsLinkedIn extends ITnsOAuthOptions {
     clientSecret: string;
     redirectUri: string;
+}
+
+export interface ITnsOAuthOptionsSalesforce extends ITnsOAuthOptions {
+    authority: string;
+    redirectUri: string;
+    responseType: string;
+}
+
+export interface ITnsOAuthOptionsCustom {
+    credentials: ITnsOAuthCredentials;
+    cookieDomains: Array<string>;
 }

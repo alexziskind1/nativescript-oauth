@@ -8,6 +8,8 @@ export declare function initFacebook(options: TnsOAuth.ITnsOAuthOptionsFacebook)
 export declare function initGoogle(options: TnsOAuth.ITnsOAuthOptionsGoogle): Promise<any>;
 export declare function initUaa(options: TnsOAuth.ITnsOAuthOptionsUaa): Promise<any>;
 export declare function initLinkedIn(options: TnsOAuth.ITnsOAuthOptionsLinkedIn): Promise<any>;
+export declare function initSalesforce(options: TnsOAuth.ITnsOAuthOptionsSalesforce): Promise<any>;
+export declare function initCustom(options: TnsOAuth.ITnsOAuthOptionsCustom): Promise<any>;
 
 export declare function accessToken(): string;
 export declare function login(successPage?: string): Promise<string>;
