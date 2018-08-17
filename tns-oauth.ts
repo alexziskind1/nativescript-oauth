@@ -130,7 +130,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                 reject('Failed to resolve return URL');
             }
 
-            if (retStr != '') {
+            if (retStr !=''  && retStr.indexOf(credentials.redirectUri)==0) {
                 let parsedRetStr = URL.parse(retStr);
                 if (parsedRetStr.query) {
                     let qsObj = querystring.parse(parsedRetStr.query);
