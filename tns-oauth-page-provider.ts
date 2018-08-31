@@ -1,12 +1,13 @@
 /// <reference path="references.d.ts" />
 
-import { Page } from 'ui/page';
+import { Page, Color } from 'ui/page';
 import { GridLayout } from 'ui/layouts/grid-layout';
 import { StackLayout } from 'ui/layouts/stack-layout';
 import { isAndroid } from 'tns-core-modules/platform';
 import { TnsOauthWebView } from './tns-oauth-webview';
 //import { TnsOAuthWebViewDelegateImpl } from './tns-oauth-webview';
 import { TnsOAuthWebViewHelper } from './tns-oauth-webview-helper';
+import { INavigationOptions } from './tns-oauth-interfaces';
 
 
 export class TnsOAuthPageProvider {
@@ -20,7 +21,7 @@ export class TnsOAuthPageProvider {
         this._authUrl = authUrl;
     }
 
-    public loginPageFunc() {
+    public loginPageFunc(options: INavigationOptions) {
         let wv = new TnsOauthWebView(this._cancelEventHandler);
 
         TnsOAuthWebViewHelper.initWithWebViewAndIntercept(wv, this._checkCodeIntercept);
@@ -34,8 +35,19 @@ export class TnsOAuthPageProvider {
         let page = new Page();
         page.content = stack;
 
-        if (isAndroid) {
+        if (options.actionBarHidden !== undefined) {
+            page.actionBarHidden = options.actionBarHidden;
+        } else if (isAndroid) {
             page.actionBarHidden = true;
+        }
+        if (options.backgroundColor) {
+            page.backgroundSpanUnderStatusBar = !!options.backgroundColor;
+            page.backgroundColor = options.backgroundColor;
+            page.actionBar.backgroundColor = options.backgroundColor;
+        }
+
+        if (options.textColor) {
+            page.actionBar.color = new Color(options.textColor);
         }
 
         wv.src = this._authUrl;

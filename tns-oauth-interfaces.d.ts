@@ -79,4 +79,7 @@ export interface INavigationOptions {
     successPage?: string;
     animated?: boolean;
     transition?: NavigationTransition;
+    actionBarHidden?: boolean;
+    backgroundColor?: string;
+    textColor?: string;
 }
