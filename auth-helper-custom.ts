@@ -16,7 +16,7 @@ export class AuthHelperCustom extends AuthHelper implements TnsOAuth.ITnsAuthHel
         this.credentials.scope = credentials.scope.replace(/ /g, '%20');
     }
 
-    public logout(successPage?: string): Promise<void> {
-        return this._logout(successPage, this.cookieDomains);
+    public logout(navOptions?: TnsOAuth.INavigationOptions): Promise<void> {
+        return this._logout(navOptions, this.cookieDomains);
     }
 }

@@ -27,9 +27,9 @@ export class AuthHelperUaa extends AuthHelper implements TnsOAuth.ITnsAuthHelper
     this._cookieDomains = cookieDomains;
   }
 
-  public logout(successPage?: string): Promise<void> {
+  public logout(navOptions?: TnsOAuth.INavigationOptions): Promise<void> {
     let cookieDomains = this._cookieDomains;
-    return this._logout(successPage, cookieDomains);
+    return this._logout(navOptions, cookieDomains);
   }
 }
 

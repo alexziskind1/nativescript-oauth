@@ -24,8 +24,8 @@ export class AuthHelperLinkedIn extends AuthHelper implements TnsOAuth.ITnsAuthH
     };
   }
   //Gets cookie domains for logging out
-  public logout(successPage?: string): Promise<void> {
+  public logout(navOptions?: TnsOAuth.INavigationOptions): Promise<void> {
     let cookieDomains = [".linkedin.com"]; 
-    return this._logout(successPage, cookieDomains);
+    return this._logout(navOptions, cookieDomains);
   }
 }

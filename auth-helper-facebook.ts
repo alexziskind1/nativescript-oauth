@@ -21,8 +21,8 @@ export class AuthHelperFacebook extends AuthHelper implements TnsOAuth.ITnsAuthH
     };
   }
 
-  public logout(successPage?: string): Promise<void> {
+  public logout(navOptions?: TnsOAuth.INavigationOptions): Promise<void> {
     let cookieDomains = [".facebook.com"]; //need to double check this
-    return this._logout(successPage, cookieDomains);
+    return this._logout(navOptions, cookieDomains);
   }
 }

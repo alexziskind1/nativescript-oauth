@@ -150,11 +150,23 @@ export function accessToken(): string {
     return instance.tokenResult.accessToken;
 }
 
-export function login(successPage?: string): Promise<string> {
-    return instance.login(successPage);
+export function login(successPage?: string);
+export function login(navOptions?: TnsOAuth.INavigationOptions);
+export function login(navOptions?: TnsOAuth.INavigationOptions | string): Promise<string> {
+    // Don't break legacy api, assign any successPage args to a navOptions obj
+    if (typeof navOptions === "string") {
+        navOptions = { successPage: navOptions };
+    }
+    return instance.login(navOptions);
 }
-export function logout(successPage?: string): Promise<void> {
-    return instance.logout(successPage);
+export function logout(successPage?: string);
+export function logout(navOptions?: TnsOAuth.INavigationOptions);
+export function logout(navOptions?: TnsOAuth.INavigationOptions | string): Promise<void> {
+    // Don't break legacy api, assign any successPage args to a navOptions obj
+    if (typeof navOptions === "string") {
+        navOptions = { successPage: navOptions };
+    }
+    return instance.logout(navOptions);
 }
 export function accessTokenExpired(): boolean {
     return instance.accessTokenExpired();

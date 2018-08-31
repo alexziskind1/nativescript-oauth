@@ -11,9 +11,9 @@ export class AuthHelper {
         this.tokenResult = tnsOauth.getTokenFromCache();
     }
 
-    public login(successPage?: string): Promise<string> {
+    public login(navOptions?: TnsOAuth.INavigationOptions): Promise<string> {
         return new Promise((resolve, reject) => {
-            tnsOauth.loginViaAuthorizationCodeFlow(this.credentials, successPage)
+            tnsOauth.loginViaAuthorizationCodeFlow(this.credentials, navOptions)
                 .then((response: TnsOAuth.ITnsOAuthTokenResult) => {
                     this.tokenResult = response;
                     resolve(response.accessToken);
@@ -37,10 +37,10 @@ export class AuthHelper {
         });
     }
 
-    public _logout(successPage?: string, cookieDomains?: string[]): Promise<void> {
+    public _logout(navOptions?: TnsOAuth.INavigationOptions, cookieDomains?: string[]): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             try {
-                tnsOauth.logout(cookieDomains, successPage);
+                tnsOauth.logout(cookieDomains, navOptions);
                 this.tokenResult = null;
                 resolve();
             } catch (er) {

@@ -101,7 +101,7 @@ export function getTokenFromCache() {
     return TnsOAuthTokenCache.getToken();
 }
 
-export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, successPage?: string): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
+export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOAuthCredentials, navOptions?: TnsOAuthModule.INavigationOptions): Promise<TnsOAuthModule.ITnsOAuthTokenResult> {
     return new Promise((resolve, reject) => {
         var navCount = 0;
 
@@ -142,10 +142,12 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                             getTokenFromCode(credentials, codeStr)
                                 .then((response: TnsOAuthModule.ITnsOAuthTokenResult) => {
                                     TnsOAuthTokenCache.setToken(response);
-                                    if (successPage && navCount === 0) {
+                                    if (navOptions.successPage && navCount === 0) {
                                         let navEntry: frameModule.NavigationEntry = {
-                                            moduleName: successPage,
-                                            clearHistory: true
+                                            moduleName: navOptions.successPage,
+                                            clearHistory: true,
+                                            animated: navOptions.animated,
+                                            transition: navOptions.transition,
                                         };
                                         frameModule.topmost().navigate(navEntry);
                                     } else {
@@ -178,7 +180,12 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
 
         console.log('LOGIN PAGE URL = ' + getAuthUrl(credentials));
         let authPage = new TnsOAuthPageProvider(checkCodeIntercept, getAuthUrl(credentials), reject);
-        frameModule.topmost().navigate(() => { return authPage.loginPageFunc() });
+        let navEntry: frameModule.NavigationEntry = {
+            create: () => authPage.loginPageFunc(navOptions),
+            animated: navOptions.animated,
+            transition: navOptions.transition,
+        };
+        frameModule.topmost().navigate(navEntry);
     });
 }
 
@@ -203,7 +210,7 @@ export function refreshToken(credentials: TnsOAuthModule.ITnsOAuthCredentials): 
     });
 }
 
-export function logout(cookieDomains: string[], successPage?: string) {
+export function logout(cookieDomains: string[], navOptions?: TnsOAuthModule.INavigationOptions) {
     if (platform.isIOS) {
         let cookieArr = utils.nsArrayToJSArray(NSHTTPCookieStorage.sharedHTTPCookieStorage.cookies);
         for (var i = 0; i < cookieArr.length; i++) {
@@ -229,10 +236,11 @@ export function logout(cookieDomains: string[], successPage?: string) {
 
     TnsOAuthTokenCache.removeToken();
 
-    if (successPage) {
+    if (navOptions.successPage) {
         let navEntry: frameModule.NavigationEntry = {
-            moduleName: successPage,
-            clearHistory: true
+            moduleName: navOptions.successPage,
+            clearHistory: true,
+            animated: navOptions.animated
         };
         frameModule.topmost().navigate(navEntry);
     }

@@ -19,8 +19,8 @@ export class AuthHelperOffice365 extends AuthHelper implements TnsOAuth.ITnsAuth
     };
   }
 
-  public logout(successPage?: string): Promise<void> {
+  public logout(navOptions?: TnsOAuth.INavigationOptions): Promise<void> {
     let cookieDomains = ["login.microsoftonline.com", ".live.com"];
-    return this._logout(successPage, cookieDomains);
+    return this._logout(navOptions, cookieDomains);
   }
 }

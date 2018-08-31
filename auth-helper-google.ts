@@ -19,8 +19,8 @@ export class AuthHelperGoogle extends AuthHelper implements TnsOAuth.ITnsAuthHel
     };
   }
 
-  public logout(successPage?: string): Promise<void> {
+  public logout(navOptions?: TnsOAuth.INavigationOptions): Promise<void> {
     let cookieDomains = [".google.com"]; //need to double check this
-    return this._logout(successPage, cookieDomains);
+    return this._logout(navOptions, cookieDomains);
   }
 }

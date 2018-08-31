@@ -1,11 +1,12 @@
+import { NavigationTransition } from "./node_modules/tns-core-modules/ui/frame/frame";
 
 
 
 export interface ITnsAuthHelper {
     credentials: ITnsOAuthCredentials;
     tokenResult: ITnsOAuthTokenResult;
-    login: (successPage?: string) => Promise<string>;
-    logout: (successPage?: string) => Promise<void>;
+    login: (navOptions?: INavigationOptions) => Promise<string>;
+    logout: (navOptions?: INavigationOptions) => Promise<void>;
     refreshToken: () => Promise<string>;
     accessTokenExpired: () => boolean;
     refreshTokenExpired: () => boolean;
@@ -72,4 +73,10 @@ export interface ITnsOAuthOptionsSalesforce extends ITnsOAuthOptions {
 export interface ITnsOAuthOptionsCustom {
     credentials: ITnsOAuthCredentials;
     cookieDomains: Array<string>;
+}
+
+export interface INavigationOptions {
+    successPage?: string;
+    animated?: boolean;
+    transition?: NavigationTransition;
 }
