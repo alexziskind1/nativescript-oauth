@@ -21,6 +21,7 @@ export class TnsOAuthWebViewHelper extends android.webkit.WebViewClient {
             let nativeView = new android.webkit.WebView(wv._context);
             nativeView.getSettings().setJavaScriptEnabled(true);
             nativeView.getSettings().setBuiltInZoomControls(true);
+            nativeView.getSettings().setDomStorageEnabled(true)
             nativeView.setWebViewClient((<any>wv)._webViewClient);
             (<any>nativeView).client = (<any>wv)._webViewClient;
             return nativeView;
