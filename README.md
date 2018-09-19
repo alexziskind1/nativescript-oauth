@@ -146,7 +146,7 @@ var myInitOptions : tnsOAuthModule.ITnsOAuthCredentials = {
     authorizeEndpoint: '/my/authorize/endpoint'
     tokenEndpoint: '/my/token/endpoint',
     clientId: 'myClientId',
-    clientSecret: 'my-client-secret,
+    clientSecret: 'my-client-secret',
     redirectUri: 'myAppDomain://callback',
     responseType: 'my tokens',
     scope: 'my requested scopes',
