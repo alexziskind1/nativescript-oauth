@@ -22,6 +22,7 @@ export interface ITnsOAuthCredentials {
     redirectUri: string;
     responseType?: string;
     scope: string;
+    resource?: string;
 }
 
 export interface ITnsOAuthCredentialsUaa extends ITnsOAuthCredentials {

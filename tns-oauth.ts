@@ -1,16 +1,15 @@
 /// <reference path="references.d.ts" />
 
 
-import * as querystring from 'querystring';
-import * as URL from 'url';
 import * as http from 'http';
-import * as trace from "trace";
-import * as frameModule from 'ui/frame';
 import * as platform from 'platform';
-import * as utils from './tns-oauth-utils';
+import * as querystring from 'querystring';
+import * as frameModule from 'ui/frame';
+import * as URL from 'url';
+import * as TnsOAuthModule from './tns-oauth-interfaces';
 import { TnsOAuthPageProvider } from './tns-oauth-page-provider';
 import { TnsOAuthTokenCache } from './tns-oauth-token-cache';
-import * as TnsOAuthModule from './tns-oauth-interfaces';
+import * as utils from './tns-oauth-utils';
 
 export var ACCESS_TOKEN_CACHE_KEY = 'ACCESS_TOKEN_CACHE_KEY';
 export var REFRESH_TOKEN_CACHE_KEY = 'REFRESH_TOKEN_CACHE_KEY';
@@ -87,7 +86,7 @@ export function getTokenFromRefreshToken(credentials: TnsOAuthModule.ITnsOAuthCr
  * @return {string} a fully formed uri with which authentication can be completed
  */
 export function getAuthUrl(credentials: TnsOAuthModule.ITnsOAuthCredentials): string {
-    return credentials.authority + credentials.authorizeEndpoint +
+    let url = credentials.authority + credentials.authorizeEndpoint +
         '?client_id=' + credentials.clientId +
         '&response_type=code' +
         '&redirect_uri=' + credentials.redirectUri +
@@ -95,6 +94,12 @@ export function getAuthUrl(credentials: TnsOAuthModule.ITnsOAuthCredentials): st
         '&response_mode=query' +
         '&nonce=' + utils.newUUID() +
         '&state=abcd';
+
+        if (credentials.resource) {
+            url = url + '&resource=' + encodeURIComponent(credentials.resource);
+        }
+
+        return url;
 }
 
 export function getTokenFromCache() {
