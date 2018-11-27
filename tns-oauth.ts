@@ -135,7 +135,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                 if (parsedRetStr.query) {
                     let qsObj = querystring.parse(parsedRetStr.query);
                     let codeStr = qsObj['code'] ? qsObj['code'] : qsObj['xsrfsign'];
-                    let errSubCode = qsObj['error_subcode'];
+                    let errSubCode = qsObj['error_subcode'] || qsObj.error;
                     if (codeStr && !hasCode) {
                         hasCode = true;
                         try {
@@ -166,7 +166,7 @@ export function loginViaAuthorizationCodeFlow(credentials: TnsOAuthModule.ITnsOA
                         return true;
                     } else {
                         if (errSubCode) {
-                            if (errSubCode == 'cancel') {
+                            if (errSubCode == 'cancel' || errSubCode === 'user_cancelled_login') {
                                 frameModule.topmost().goBack();
                             }
                         }
